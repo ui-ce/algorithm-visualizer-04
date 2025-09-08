@@ -1,0 +1,14 @@
+:host {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  .title {
+    text-align: left;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #555;
+    padding-inline: 0.5rem;
+  }
+}

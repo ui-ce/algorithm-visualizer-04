@@ -1,0 +1,39 @@
+:host {
+  display: block;
+  width: 100%;
+
+  .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+
+    .title {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+  }
+
+
+  .table-container {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .array2d-table {
+      border-collapse: collapse;
+
+      td {
+        border: 2px solid #ccc;
+        text-align: center;
+        vertical-align: middle;
+      }
+    }
+  }
+}
+
+

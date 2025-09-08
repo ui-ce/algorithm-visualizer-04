@@ -1,0 +1,24 @@
+.body {
+  padding: 2rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  .algo {
+    width: 25rem;
+    height: 30rem;
+    overflow: hidden;
+
+    .algo-image {
+      width: 25rem;
+      height: 15rem;
+      overflow: hidden;
+      object-fit: contain;
+    }
+
+    .algo-text {
+      font-family: Roboto;
+    }
+  }
+}

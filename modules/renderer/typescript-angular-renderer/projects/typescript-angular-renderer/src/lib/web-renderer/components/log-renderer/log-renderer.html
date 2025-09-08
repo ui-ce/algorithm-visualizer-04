@@ -1,0 +1,9 @@
+<p-card [style.min-height]="getMinHeight()">
+  <ng-template #header>
+    <div class="header">
+      <span class="title">{{ state?.name }}</span>
+    </div>
+  </ng-template>
+
+  <div class="message" [style.color]="getColor()">{{ state.message }}</div>
+</p-card>

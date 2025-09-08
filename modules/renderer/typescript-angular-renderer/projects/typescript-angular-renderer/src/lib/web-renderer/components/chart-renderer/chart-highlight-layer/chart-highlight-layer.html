@@ -1,0 +1,5 @@
+<div class="highlight-layer" [style.background-color]="colors[0]">
+  @if (colors.length > 1) {
+    <chart-highlight-layer [colors]="colors.slice(1)"></chart-highlight-layer>
+  }
+</div>

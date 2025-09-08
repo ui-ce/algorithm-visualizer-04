@@ -1,0 +1,25 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-block-end: 1px solid #123b59;
+
+  padding-inline: 2rem;
+
+  .header-left {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    font-size: 1.5rem;
+    font-family: 'Roboto';
+    color: #123b59;
+    cursor: pointer;
+  }
+
+  .header-right {
+    font-size: 1rem;
+    font-family: sans-serif;
+    font-weight: bold;
+    color: #123b59;
+  }
+}

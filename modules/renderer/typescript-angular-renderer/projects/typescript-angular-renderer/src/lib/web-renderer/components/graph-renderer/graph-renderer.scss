@@ -1,0 +1,23 @@
+:host {
+  display: block;
+  width: 100%;
+
+  .graph {
+    width: 100%;
+  }
+
+  .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+
+    .title {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+  }
+}
+
+

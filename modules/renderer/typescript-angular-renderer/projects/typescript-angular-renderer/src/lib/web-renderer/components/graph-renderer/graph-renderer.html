@@ -1,0 +1,15 @@
+<p-card>
+  <ng-template #header>
+    <div class="header">
+      <span class="title">{{ state?.name }}</span>
+
+      <div class="layout-toolbar p-fluid p-formgrid p-grid" style="gap: 1rem;">
+        <div class="p-field p-col-12 p-md-4">
+          <p-selectbutton [options]="layoutOptions" [ngModel]="circleLayout" (ngModelChange)="changeLayout($event)" optionLabel="label" optionValue="value" aria-labelledby="basic"/>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <div #cyContainer class="graph" [style.height]="minHeight"></div>
+</p-card>

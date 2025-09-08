@@ -1,0 +1,26 @@
+<p-card [style.min-height]="getMinHeight()">
+  <ng-template #header>
+    <div class="header">
+      <span class="title">{{ state?.name }}</span>
+    </div>
+  </ng-template>
+
+  <div class="table-container">
+    <table class="array2d-table">
+      @for (row of state?.values; track $index) {
+        <tr>
+          @for (cell of row; track $index) {
+            <td [style.background-color]="getDefaultColor()" [style.width]="getCellSize()" [style.height]="getCellSize()">
+              @let colors = getCellColors(cell);
+              @if (colors.length !== 0) {
+                <array-2d-highlight-layer [colors]="getCellColors(cell)" [value]="cell.value"/>
+              } @else {
+                <span>{{ cell.value }}</span>
+              }
+            </td>
+          }
+        </tr>
+      }
+    </table>
+  </div>
+</p-card>

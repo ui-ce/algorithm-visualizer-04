@@ -1,0 +1,27 @@
+@if (hasPlayer) {
+  <web-player [animationLength]="animation?.length" (frameIndexChange)="onFrameIndexChange($event)"></web-player>
+}
+
+<span class="title">{{ getDocumentName() }}</span>
+
+@if (currentFrame; as frame) {
+  @for (frameState of frame; track $index) {
+    @switch (frameState.type) {
+      @case ('Graph') {
+        <graph-renderer [state]="convertToGraphState(frameState.state)" [metadata]="convertToGraphMetadata(getMetaData(frameState.type, frameState.id))"/>
+      }
+
+      @case ('Log') {
+        <log-renderer [state]="convertToLogState(frameState.state)" [metadata]="convertToLogMetaData(getMetaData(frameState.type, frameState.id))"/>
+      }
+
+      @case ('Array2D') {
+        <array-2d-renderer [state]="convertToArray2dState(frameState.state)" [metadata]="convertToArray2DMetaData(getMetaData(frameState.type, frameState.id))"/>
+      }
+
+      @case ('Chart') {
+        <chart-renderer [state]="convertToChartState(frameState.state)" [metadata]="convertToChartMetaData(getMetaData(frameState.type, frameState.id))"/>
+      }
+    }
+  }
+}

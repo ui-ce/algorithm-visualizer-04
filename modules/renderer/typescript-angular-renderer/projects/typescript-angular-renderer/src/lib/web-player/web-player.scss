@@ -1,0 +1,32 @@
+.toolbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  .player {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .frame-slider {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 10rem;
+    gap: 0.5rem;
+
+    .slider {
+      width: 100%;
+    }
+
+    color: gray;
+    font-weight: bold;
+  }
+}

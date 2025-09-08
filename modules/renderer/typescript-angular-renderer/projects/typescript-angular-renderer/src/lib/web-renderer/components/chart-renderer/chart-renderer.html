@@ -1,0 +1,26 @@
+<p-card>
+  <ng-template #header>
+    <div class="header">
+      <span class="title">{{ state?.name }}</span>
+    </div>
+  </ng-template>
+
+  <div class="chart" [style.height]="getChartHeight()" [style.gap]="getBarGap()">
+    @for (bar of state?.bars; track $index) {
+      <div class="bar-container" [style.width]="getBarWidth()">
+        @if (getShowValue()) {
+          <div class="value">{{ bar.value }}</div>
+        }
+        <div class="bar" [style.height]="getBarHeight(bar.value)" [style.background-color]="getDefaultColor()">
+          @let colors = getBarColors(bar.highlightTags);
+          @if (colors.length !== 0) {
+            <chart-highlight-layer [colors]="colors"></chart-highlight-layer>
+          }
+        </div>
+        @if (getShowLabel()) {
+          <div class="label">{{ bar.label }}</div>
+        }
+      </div>
+    }
+  </div>
+</p-card>

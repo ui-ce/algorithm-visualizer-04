@@ -1,0 +1,26 @@
+<div class="setting">
+  <div class="start">
+    <div class="setting-section">
+      <span>Range </span>
+      <p-slider [(ngModel)]="minMax" (ngModelChange)="run()" [min]="1" [max]="100" [range]="true" class="slider"/>
+      <span>({{ minMax[0] + ' - ' + minMax[1] }})</span>
+    </div>
+    <div class="setting-section">
+      <span>Count</span>
+      <p-slider [(ngModel)]="count" (ngModelChange)="run()" [min]="10" [max]="80" class="slider"/>
+      <span>({{ count }})</span>
+    </div>
+
+    <p-inputnumber [(ngModel)]="target" (ngModelChange)="run()" [showButtons]="true" size="small" buttonLayout="horizontal" spinnerMode="vertical" inputId="vertical" [inputStyle]="{ width: '3rem' }">
+      <ng-template #incrementbuttonicon>
+        <span class="pi pi-plus"></span>
+      </ng-template>
+      <ng-template #decrementbuttonicon>
+        <span class="pi pi-minus"></span>
+      </ng-template>
+    </p-inputnumber>
+  </div>
+
+  <p-button [size]="'small'" (click)="run()" [icon]="'pi pi-sync'"/>
+</div>
+<web-renderer [animation]="animation" [rendererMetadata]="rendererMetadata" class="renderer"></web-renderer>

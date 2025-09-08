@@ -1,0 +1,1666 @@
+\documentclass{article}
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+\usepackage[margin=1in]{geometry}
+\begin{document}
+% --- Frame 0 ---
+\begin{center}\LARGE\textbf{TSP}\\[6mm]\end{center}
+\begin{center}
+\begin{flushleft}\textbf{TSP Log}\\[1.75mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (0,0) rectangle (10cm, -0.25cm);
+  \node[anchor=north, align=center, text=black] at (5cm,0) {\texttt{Initial State}};
+\end{tikzpicture}
+\end{center}
+\noindent\rule{\linewidth}{0.3pt}
+\begin{center}
+\begin{flushleft}\textbf{TSP Graph}\\[2mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (-4cm,0) rectangle (4cm, -3cm);
+  \node[circle, draw, minimum size=8mm, fill=white] (A) at (0.0:3cm) {A};
+  \node[circle, draw, minimum size=8mm, fill=white] (B) at (51.4:3cm) {B};
+  \node[circle, draw, minimum size=8mm, fill=white] (C) at (102.9:3cm) {C};
+  \node[circle, draw, minimum size=8mm, fill=white] (D) at (154.3:3cm) {D};
+  \node[circle, draw, minimum size=8mm, fill=white] (E) at (205.7:3cm) {E};
+  \node[circle, draw, minimum size=8mm, fill=white] (F) at (257.1:3cm) {F};
+  \node[circle, draw, minimum size=8mm, fill=white] (G) at (308.6:3cm) {G};
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {10} (B);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {15} (C);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {20} (D);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {25} (E);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {18} (F);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {12} (G);
+  \draw[black, line width=1.2pt] (B) -- node[midway, sloped, above] {35} (C);
+  \draw[black, line width=1.2pt] (B) -- node[midway, sloped, above] {25} (D);
+  \draw[black, line width=1.2pt] (B) -- node[midway, sloped, above] {30} (E);
+  \draw[black, line width=1.2pt] (B) -- node[midway, sloped, above] {22} (F);
+  \draw[black, line width=1.2pt] (B) -- node[midway, sloped, above] {28} (G);
+  \draw[black, line width=1.2pt] (C) -- node[midway, sloped, above] {30} (D);
+  \draw[black, line width=1.2pt] (C) -- node[midway, sloped, above] {16} (E);
+  \draw[black, line width=1.2pt] (C) -- node[midway, sloped, above] {24} (F);
+  \draw[black, line width=1.2pt] (C) -- node[midway, sloped, above] {20} (G);
+  \draw[black, line width=1.2pt] (D) -- node[midway, sloped, above] {18} (E);
+  \draw[black, line width=1.2pt] (D) -- node[midway, sloped, above] {27} (F);
+  \draw[black, line width=1.2pt] (D) -- node[midway, sloped, above] {14} (G);
+  \draw[black, line width=1.2pt] (E) -- node[midway, sloped, above] {12} (F);
+  \draw[black, line width=1.2pt] (E) -- node[midway, sloped, above] {22} (G);
+  \draw[black, line width=1.2pt] (F) -- node[midway, sloped, above] {26} (G);
+\end{tikzpicture}
+\end{center}
+\noindent\rule{\linewidth}{0.3pt}
+\begin{center}
+\begin{flushleft}\textbf{Distance Matrix}\\[1.75mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (0cm,0cm) rectangle (5.6000000000000005cm, -5.6000000000000005cm);
+  \filldraw[fill=white] (0cm,-0.8cm) rectangle (0.8cm,0cm);
+  \node at (0.4cm,-0.4cm) {0};
+  \filldraw[fill=white] (0.8cm,-0.8cm) rectangle (1.6cm,0cm);
+  \node at (1.2000000000000002cm,-0.4cm) {10};
+  \filldraw[fill=white] (1.6cm,-0.8cm) rectangle (2.4000000000000004cm,0cm);
+  \node at (2cm,-0.4cm) {15};
+  \filldraw[fill=white] (2.4000000000000004cm,-0.8cm) rectangle (3.2cm,0cm);
+  \node at (2.8000000000000003cm,-0.4cm) {20};
+  \filldraw[fill=white] (3.2cm,-0.8cm) rectangle (4cm,0cm);
+  \node at (3.6cm,-0.4cm) {25};
+  \filldraw[fill=white] (4cm,-0.8cm) rectangle (4.8cm,0cm);
+  \node at (4.4cm,-0.4cm) {18};
+  \filldraw[fill=white] (4.800000000000001cm,-0.8cm) rectangle (5.6000000000000005cm,0cm);
+  \node at (5.200000000000001cm,-0.4cm) {12};
+  \filldraw[fill=white] (0cm,-1.6cm) rectangle (0.8cm,-0.8cm);
+  \node at (0.4cm,-1.2000000000000002cm) {10};
+  \filldraw[fill=white] (0.8cm,-1.6cm) rectangle (1.6cm,-0.8cm);
+  \node at (1.2000000000000002cm,-1.2000000000000002cm) {0};
+  \filldraw[fill=white] (1.6cm,-1.6cm) rectangle (2.4000000000000004cm,-0.8cm);
+  \node at (2cm,-1.2000000000000002cm) {35};
+  \filldraw[fill=white] (2.4000000000000004cm,-1.6cm) rectangle (3.2cm,-0.8cm);
+  \node at (2.8000000000000003cm,-1.2000000000000002cm) {25};
+  \filldraw[fill=white] (3.2cm,-1.6cm) rectangle (4cm,-0.8cm);
+  \node at (3.6cm,-1.2000000000000002cm) {30};
+  \filldraw[fill=white] (4cm,-1.6cm) rectangle (4.8cm,-0.8cm);
+  \node at (4.4cm,-1.2000000000000002cm) {22};
+  \filldraw[fill=white] (4.800000000000001cm,-1.6cm) rectangle (5.6000000000000005cm,-0.8cm);
+  \node at (5.200000000000001cm,-1.2000000000000002cm) {28};
+  \filldraw[fill=white] (0cm,-2.4000000000000004cm) rectangle (0.8cm,-1.6cm);
+  \node at (0.4cm,-2cm) {15};
+  \filldraw[fill=white] (0.8cm,-2.4000000000000004cm) rectangle (1.6cm,-1.6cm);
+  \node at (1.2000000000000002cm,-2cm) {35};
+  \filldraw[fill=white] (1.6cm,-2.4000000000000004cm) rectangle (2.4000000000000004cm,-1.6cm);
+  \node at (2cm,-2cm) {0};
+  \filldraw[fill=white] (2.4000000000000004cm,-2.4000000000000004cm) rectangle (3.2cm,-1.6cm);
+  \node at (2.8000000000000003cm,-2cm) {30};
+  \filldraw[fill=white] (3.2cm,-2.4000000000000004cm) rectangle (4cm,-1.6cm);
+  \node at (3.6cm,-2cm) {16};
+  \filldraw[fill=white] (4cm,-2.4000000000000004cm) rectangle (4.8cm,-1.6cm);
+  \node at (4.4cm,-2cm) {24};
+  \filldraw[fill=white] (4.800000000000001cm,-2.4000000000000004cm) rectangle (5.6000000000000005cm,-1.6cm);
+  \node at (5.200000000000001cm,-2cm) {20};
+  \filldraw[fill=white] (0cm,-3.2cm) rectangle (0.8cm,-2.4000000000000004cm);
+  \node at (0.4cm,-2.8000000000000003cm) {20};
+  \filldraw[fill=white] (0.8cm,-3.2cm) rectangle (1.6cm,-2.4000000000000004cm);
+  \node at (1.2000000000000002cm,-2.8000000000000003cm) {25};
+  \filldraw[fill=white] (1.6cm,-3.2cm) rectangle (2.4000000000000004cm,-2.4000000000000004cm);
+  \node at (2cm,-2.8000000000000003cm) {30};
+  \filldraw[fill=white] (2.4000000000000004cm,-3.2cm) rectangle (3.2cm,-2.4000000000000004cm);
+  \node at (2.8000000000000003cm,-2.8000000000000003cm) {0};
+  \filldraw[fill=white] (3.2cm,-3.2cm) rectangle (4cm,-2.4000000000000004cm);
+  \node at (3.6cm,-2.8000000000000003cm) {18};
+  \filldraw[fill=white] (4cm,-3.2cm) rectangle (4.8cm,-2.4000000000000004cm);
+  \node at (4.4cm,-2.8000000000000003cm) {27};
+  \filldraw[fill=white] (4.800000000000001cm,-3.2cm) rectangle (5.6000000000000005cm,-2.4000000000000004cm);
+  \node at (5.200000000000001cm,-2.8000000000000003cm) {14};
+  \filldraw[fill=white] (0cm,-4cm) rectangle (0.8cm,-3.2cm);
+  \node at (0.4cm,-3.6cm) {25};
+  \filldraw[fill=white] (0.8cm,-4cm) rectangle (1.6cm,-3.2cm);
+  \node at (1.2000000000000002cm,-3.6cm) {30};
+  \filldraw[fill=white] (1.6cm,-4cm) rectangle (2.4000000000000004cm,-3.2cm);
+  \node at (2cm,-3.6cm) {16};
+  \filldraw[fill=white] (2.4000000000000004cm,-4cm) rectangle (3.2cm,-3.2cm);
+  \node at (2.8000000000000003cm,-3.6cm) {18};
+  \filldraw[fill=white] (3.2cm,-4cm) rectangle (4cm,-3.2cm);
+  \node at (3.6cm,-3.6cm) {0};
+  \filldraw[fill=white] (4cm,-4cm) rectangle (4.8cm,-3.2cm);
+  \node at (4.4cm,-3.6cm) {12};
+  \filldraw[fill=white] (4.800000000000001cm,-4cm) rectangle (5.6000000000000005cm,-3.2cm);
+  \node at (5.200000000000001cm,-3.6cm) {22};
+  \filldraw[fill=white] (0cm,-4.8cm) rectangle (0.8cm,-4cm);
+  \node at (0.4cm,-4.4cm) {18};
+  \filldraw[fill=white] (0.8cm,-4.8cm) rectangle (1.6cm,-4cm);
+  \node at (1.2000000000000002cm,-4.4cm) {22};
+  \filldraw[fill=white] (1.6cm,-4.8cm) rectangle (2.4000000000000004cm,-4cm);
+  \node at (2cm,-4.4cm) {24};
+  \filldraw[fill=white] (2.4000000000000004cm,-4.8cm) rectangle (3.2cm,-4cm);
+  \node at (2.8000000000000003cm,-4.4cm) {27};
+  \filldraw[fill=white] (3.2cm,-4.8cm) rectangle (4cm,-4cm);
+  \node at (3.6cm,-4.4cm) {12};
+  \filldraw[fill=white] (4cm,-4.8cm) rectangle (4.8cm,-4cm);
+  \node at (4.4cm,-4.4cm) {0};
+  \filldraw[fill=white] (4.800000000000001cm,-4.8cm) rectangle (5.6000000000000005cm,-4cm);
+  \node at (5.200000000000001cm,-4.4cm) {26};
+  \filldraw[fill=white] (0cm,-5.6000000000000005cm) rectangle (0.8cm,-4.800000000000001cm);
+  \node at (0.4cm,-5.200000000000001cm) {12};
+  \filldraw[fill=white] (0.8cm,-5.6000000000000005cm) rectangle (1.6cm,-4.800000000000001cm);
+  \node at (1.2000000000000002cm,-5.200000000000001cm) {28};
+  \filldraw[fill=white] (1.6cm,-5.6000000000000005cm) rectangle (2.4000000000000004cm,-4.800000000000001cm);
+  \node at (2cm,-5.200000000000001cm) {20};
+  \filldraw[fill=white] (2.4000000000000004cm,-5.6000000000000005cm) rectangle (3.2cm,-4.800000000000001cm);
+  \node at (2.8000000000000003cm,-5.200000000000001cm) {14};
+  \filldraw[fill=white] (3.2cm,-5.6000000000000005cm) rectangle (4cm,-4.800000000000001cm);
+  \node at (3.6cm,-5.200000000000001cm) {22};
+  \filldraw[fill=white] (4cm,-5.6000000000000005cm) rectangle (4.8cm,-4.800000000000001cm);
+  \node at (4.4cm,-5.200000000000001cm) {26};
+  \filldraw[fill=white] (4.800000000000001cm,-5.6000000000000005cm) rectangle (5.6000000000000005cm,-4.800000000000001cm);
+  \node at (5.200000000000001cm,-5.200000000000001cm) {0};
+\end{tikzpicture}
+\end{center}
+\noindent\rule{\linewidth}{0.3pt}
+\begin{center}
+\textbf{Tour Cost}
+\end{center}
+\newpage
+% --- Frame 1 ---
+\begin{center}\LARGE\textbf{TSP}\\[6mm]\end{center}
+\begin{center}
+\begin{flushleft}\textbf{TSP Log}\\[1.75mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (0,0) rectangle (10cm, -0.25cm);
+  \node[anchor=north, align=center, text=black] at (5cm,0) {\texttt{Start at city A}};
+\end{tikzpicture}
+\end{center}
+\noindent\rule{\linewidth}{0.3pt}
+\begin{center}
+\begin{flushleft}\textbf{TSP Graph}\\[2mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (-4cm,0) rectangle (4cm, -3cm);
+  \node[circle, draw, minimum size=8mm, fill=blue!50] (A) at (0.0:3cm) {A};
+  \node[circle, draw, minimum size=8mm, fill=white] (B) at (51.4:3cm) {B};
+  \node[circle, draw, minimum size=8mm, fill=white] (C) at (102.9:3cm) {C};
+  \node[circle, draw, minimum size=8mm, fill=white] (D) at (154.3:3cm) {D};
+  \node[circle, draw, minimum size=8mm, fill=white] (E) at (205.7:3cm) {E};
+  \node[circle, draw, minimum size=8mm, fill=white] (F) at (257.1:3cm) {F};
+  \node[circle, draw, minimum size=8mm, fill=white] (G) at (308.6:3cm) {G};
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {10} (B);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {15} (C);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {20} (D);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {25} (E);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {18} (F);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {12} (G);
+  \draw[black, line width=1.2pt] (B) -- node[midway, sloped, above] {35} (C);
+  \draw[black, line width=1.2pt] (B) -- node[midway, sloped, above] {25} (D);
+  \draw[black, line width=1.2pt] (B) -- node[midway, sloped, above] {30} (E);
+  \draw[black, line width=1.2pt] (B) -- node[midway, sloped, above] {22} (F);
+  \draw[black, line width=1.2pt] (B) -- node[midway, sloped, above] {28} (G);
+  \draw[black, line width=1.2pt] (C) -- node[midway, sloped, above] {30} (D);
+  \draw[black, line width=1.2pt] (C) -- node[midway, sloped, above] {16} (E);
+  \draw[black, line width=1.2pt] (C) -- node[midway, sloped, above] {24} (F);
+  \draw[black, line width=1.2pt] (C) -- node[midway, sloped, above] {20} (G);
+  \draw[black, line width=1.2pt] (D) -- node[midway, sloped, above] {18} (E);
+  \draw[black, line width=1.2pt] (D) -- node[midway, sloped, above] {27} (F);
+  \draw[black, line width=1.2pt] (D) -- node[midway, sloped, above] {14} (G);
+  \draw[black, line width=1.2pt] (E) -- node[midway, sloped, above] {12} (F);
+  \draw[black, line width=1.2pt] (E) -- node[midway, sloped, above] {22} (G);
+  \draw[black, line width=1.2pt] (F) -- node[midway, sloped, above] {26} (G);
+\end{tikzpicture}
+\end{center}
+\noindent\rule{\linewidth}{0.3pt}
+\begin{center}
+\begin{flushleft}\textbf{Distance Matrix}\\[1.75mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (0cm,0cm) rectangle (5.6000000000000005cm, -5.6000000000000005cm);
+  \filldraw[fill=white] (0cm,-0.8cm) rectangle (0.8cm,0cm);
+  \node at (0.4cm,-0.4cm) {0};
+  \filldraw[fill=white] (0.8cm,-0.8cm) rectangle (1.6cm,0cm);
+  \node at (1.2000000000000002cm,-0.4cm) {10};
+  \filldraw[fill=white] (1.6cm,-0.8cm) rectangle (2.4000000000000004cm,0cm);
+  \node at (2cm,-0.4cm) {15};
+  \filldraw[fill=white] (2.4000000000000004cm,-0.8cm) rectangle (3.2cm,0cm);
+  \node at (2.8000000000000003cm,-0.4cm) {20};
+  \filldraw[fill=white] (3.2cm,-0.8cm) rectangle (4cm,0cm);
+  \node at (3.6cm,-0.4cm) {25};
+  \filldraw[fill=white] (4cm,-0.8cm) rectangle (4.8cm,0cm);
+  \node at (4.4cm,-0.4cm) {18};
+  \filldraw[fill=white] (4.800000000000001cm,-0.8cm) rectangle (5.6000000000000005cm,0cm);
+  \node at (5.200000000000001cm,-0.4cm) {12};
+  \filldraw[fill=white] (0cm,-1.6cm) rectangle (0.8cm,-0.8cm);
+  \node at (0.4cm,-1.2000000000000002cm) {10};
+  \filldraw[fill=white] (0.8cm,-1.6cm) rectangle (1.6cm,-0.8cm);
+  \node at (1.2000000000000002cm,-1.2000000000000002cm) {0};
+  \filldraw[fill=white] (1.6cm,-1.6cm) rectangle (2.4000000000000004cm,-0.8cm);
+  \node at (2cm,-1.2000000000000002cm) {35};
+  \filldraw[fill=white] (2.4000000000000004cm,-1.6cm) rectangle (3.2cm,-0.8cm);
+  \node at (2.8000000000000003cm,-1.2000000000000002cm) {25};
+  \filldraw[fill=white] (3.2cm,-1.6cm) rectangle (4cm,-0.8cm);
+  \node at (3.6cm,-1.2000000000000002cm) {30};
+  \filldraw[fill=white] (4cm,-1.6cm) rectangle (4.8cm,-0.8cm);
+  \node at (4.4cm,-1.2000000000000002cm) {22};
+  \filldraw[fill=white] (4.800000000000001cm,-1.6cm) rectangle (5.6000000000000005cm,-0.8cm);
+  \node at (5.200000000000001cm,-1.2000000000000002cm) {28};
+  \filldraw[fill=white] (0cm,-2.4000000000000004cm) rectangle (0.8cm,-1.6cm);
+  \node at (0.4cm,-2cm) {15};
+  \filldraw[fill=white] (0.8cm,-2.4000000000000004cm) rectangle (1.6cm,-1.6cm);
+  \node at (1.2000000000000002cm,-2cm) {35};
+  \filldraw[fill=white] (1.6cm,-2.4000000000000004cm) rectangle (2.4000000000000004cm,-1.6cm);
+  \node at (2cm,-2cm) {0};
+  \filldraw[fill=white] (2.4000000000000004cm,-2.4000000000000004cm) rectangle (3.2cm,-1.6cm);
+  \node at (2.8000000000000003cm,-2cm) {30};
+  \filldraw[fill=white] (3.2cm,-2.4000000000000004cm) rectangle (4cm,-1.6cm);
+  \node at (3.6cm,-2cm) {16};
+  \filldraw[fill=white] (4cm,-2.4000000000000004cm) rectangle (4.8cm,-1.6cm);
+  \node at (4.4cm,-2cm) {24};
+  \filldraw[fill=white] (4.800000000000001cm,-2.4000000000000004cm) rectangle (5.6000000000000005cm,-1.6cm);
+  \node at (5.200000000000001cm,-2cm) {20};
+  \filldraw[fill=white] (0cm,-3.2cm) rectangle (0.8cm,-2.4000000000000004cm);
+  \node at (0.4cm,-2.8000000000000003cm) {20};
+  \filldraw[fill=white] (0.8cm,-3.2cm) rectangle (1.6cm,-2.4000000000000004cm);
+  \node at (1.2000000000000002cm,-2.8000000000000003cm) {25};
+  \filldraw[fill=white] (1.6cm,-3.2cm) rectangle (2.4000000000000004cm,-2.4000000000000004cm);
+  \node at (2cm,-2.8000000000000003cm) {30};
+  \filldraw[fill=white] (2.4000000000000004cm,-3.2cm) rectangle (3.2cm,-2.4000000000000004cm);
+  \node at (2.8000000000000003cm,-2.8000000000000003cm) {0};
+  \filldraw[fill=white] (3.2cm,-3.2cm) rectangle (4cm,-2.4000000000000004cm);
+  \node at (3.6cm,-2.8000000000000003cm) {18};
+  \filldraw[fill=white] (4cm,-3.2cm) rectangle (4.8cm,-2.4000000000000004cm);
+  \node at (4.4cm,-2.8000000000000003cm) {27};
+  \filldraw[fill=white] (4.800000000000001cm,-3.2cm) rectangle (5.6000000000000005cm,-2.4000000000000004cm);
+  \node at (5.200000000000001cm,-2.8000000000000003cm) {14};
+  \filldraw[fill=white] (0cm,-4cm) rectangle (0.8cm,-3.2cm);
+  \node at (0.4cm,-3.6cm) {25};
+  \filldraw[fill=white] (0.8cm,-4cm) rectangle (1.6cm,-3.2cm);
+  \node at (1.2000000000000002cm,-3.6cm) {30};
+  \filldraw[fill=white] (1.6cm,-4cm) rectangle (2.4000000000000004cm,-3.2cm);
+  \node at (2cm,-3.6cm) {16};
+  \filldraw[fill=white] (2.4000000000000004cm,-4cm) rectangle (3.2cm,-3.2cm);
+  \node at (2.8000000000000003cm,-3.6cm) {18};
+  \filldraw[fill=white] (3.2cm,-4cm) rectangle (4cm,-3.2cm);
+  \node at (3.6cm,-3.6cm) {0};
+  \filldraw[fill=white] (4cm,-4cm) rectangle (4.8cm,-3.2cm);
+  \node at (4.4cm,-3.6cm) {12};
+  \filldraw[fill=white] (4.800000000000001cm,-4cm) rectangle (5.6000000000000005cm,-3.2cm);
+  \node at (5.200000000000001cm,-3.6cm) {22};
+  \filldraw[fill=white] (0cm,-4.8cm) rectangle (0.8cm,-4cm);
+  \node at (0.4cm,-4.4cm) {18};
+  \filldraw[fill=white] (0.8cm,-4.8cm) rectangle (1.6cm,-4cm);
+  \node at (1.2000000000000002cm,-4.4cm) {22};
+  \filldraw[fill=white] (1.6cm,-4.8cm) rectangle (2.4000000000000004cm,-4cm);
+  \node at (2cm,-4.4cm) {24};
+  \filldraw[fill=white] (2.4000000000000004cm,-4.8cm) rectangle (3.2cm,-4cm);
+  \node at (2.8000000000000003cm,-4.4cm) {27};
+  \filldraw[fill=white] (3.2cm,-4.8cm) rectangle (4cm,-4cm);
+  \node at (3.6cm,-4.4cm) {12};
+  \filldraw[fill=white] (4cm,-4.8cm) rectangle (4.8cm,-4cm);
+  \node at (4.4cm,-4.4cm) {0};
+  \filldraw[fill=white] (4.800000000000001cm,-4.8cm) rectangle (5.6000000000000005cm,-4cm);
+  \node at (5.200000000000001cm,-4.4cm) {26};
+  \filldraw[fill=white] (0cm,-5.6000000000000005cm) rectangle (0.8cm,-4.800000000000001cm);
+  \node at (0.4cm,-5.200000000000001cm) {12};
+  \filldraw[fill=white] (0.8cm,-5.6000000000000005cm) rectangle (1.6cm,-4.800000000000001cm);
+  \node at (1.2000000000000002cm,-5.200000000000001cm) {28};
+  \filldraw[fill=white] (1.6cm,-5.6000000000000005cm) rectangle (2.4000000000000004cm,-4.800000000000001cm);
+  \node at (2cm,-5.200000000000001cm) {20};
+  \filldraw[fill=white] (2.4000000000000004cm,-5.6000000000000005cm) rectangle (3.2cm,-4.800000000000001cm);
+  \node at (2.8000000000000003cm,-5.200000000000001cm) {14};
+  \filldraw[fill=white] (3.2cm,-5.6000000000000005cm) rectangle (4cm,-4.800000000000001cm);
+  \node at (3.6cm,-5.200000000000001cm) {22};
+  \filldraw[fill=white] (4cm,-5.6000000000000005cm) rectangle (4.8cm,-4.800000000000001cm);
+  \node at (4.4cm,-5.200000000000001cm) {26};
+  \filldraw[fill=white] (4.800000000000001cm,-5.6000000000000005cm) rectangle (5.6000000000000005cm,-4.800000000000001cm);
+  \node at (5.200000000000001cm,-5.200000000000001cm) {0};
+\end{tikzpicture}
+\end{center}
+\noindent\rule{\linewidth}{0.3pt}
+\begin{center}
+\textbf{Tour Cost}
+\end{center}
+\newpage
+% --- Frame 2 ---
+\begin{center}\LARGE\textbf{TSP}\\[6mm]\end{center}
+\begin{center}
+\begin{flushleft}\textbf{TSP Log}\\[1.75mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (0,0) rectangle (10cm, -0.25cm);
+  \node[anchor=north, align=center, text=black] at (5cm,0) {\texttt{Move to B with distance 10}};
+\end{tikzpicture}
+\end{center}
+\noindent\rule{\linewidth}{0.3pt}
+\begin{center}
+\begin{flushleft}\textbf{TSP Graph}\\[2mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (-4cm,0) rectangle (4cm, -3cm);
+  \node[circle, draw, minimum size=8mm, fill=blue!20] (A) at (0.0:3cm) {A};
+  \node[circle, draw, minimum size=8mm, fill=blue!50] (B) at (51.4:3cm) {B};
+  \node[circle, draw, minimum size=8mm, fill=white] (C) at (102.9:3cm) {C};
+  \node[circle, draw, minimum size=8mm, fill=white] (D) at (154.3:3cm) {D};
+  \node[circle, draw, minimum size=8mm, fill=white] (E) at (205.7:3cm) {E};
+  \node[circle, draw, minimum size=8mm, fill=white] (F) at (257.1:3cm) {F};
+  \node[circle, draw, minimum size=8mm, fill=white] (G) at (308.6:3cm) {G};
+  \draw[green!100, line width=1.2pt] (A) -- node[midway, sloped, above] {10} (B);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {15} (C);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {20} (D);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {25} (E);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {18} (F);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {12} (G);
+  \draw[black, line width=1.2pt] (B) -- node[midway, sloped, above] {35} (C);
+  \draw[black, line width=1.2pt] (B) -- node[midway, sloped, above] {25} (D);
+  \draw[black, line width=1.2pt] (B) -- node[midway, sloped, above] {30} (E);
+  \draw[black, line width=1.2pt] (B) -- node[midway, sloped, above] {22} (F);
+  \draw[black, line width=1.2pt] (B) -- node[midway, sloped, above] {28} (G);
+  \draw[black, line width=1.2pt] (C) -- node[midway, sloped, above] {30} (D);
+  \draw[black, line width=1.2pt] (C) -- node[midway, sloped, above] {16} (E);
+  \draw[black, line width=1.2pt] (C) -- node[midway, sloped, above] {24} (F);
+  \draw[black, line width=1.2pt] (C) -- node[midway, sloped, above] {20} (G);
+  \draw[black, line width=1.2pt] (D) -- node[midway, sloped, above] {18} (E);
+  \draw[black, line width=1.2pt] (D) -- node[midway, sloped, above] {27} (F);
+  \draw[black, line width=1.2pt] (D) -- node[midway, sloped, above] {14} (G);
+  \draw[black, line width=1.2pt] (E) -- node[midway, sloped, above] {12} (F);
+  \draw[black, line width=1.2pt] (E) -- node[midway, sloped, above] {22} (G);
+  \draw[black, line width=1.2pt] (F) -- node[midway, sloped, above] {26} (G);
+\end{tikzpicture}
+\end{center}
+\noindent\rule{\linewidth}{0.3pt}
+\begin{center}
+\begin{flushleft}\textbf{Distance Matrix}\\[1.75mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (0cm,0cm) rectangle (5.6000000000000005cm, -5.6000000000000005cm);
+  \filldraw[fill=white] (0cm,-0.8cm) rectangle (0.8cm,0cm);
+  \node at (0.4cm,-0.4cm) {0};
+  \filldraw[fill=white] (0.8cm,-0.8cm) rectangle (1.6cm,0cm);
+  \node at (1.2000000000000002cm,-0.4cm) {10};
+  \filldraw[fill=white] (1.6cm,-0.8cm) rectangle (2.4000000000000004cm,0cm);
+  \node at (2cm,-0.4cm) {15};
+  \filldraw[fill=white] (2.4000000000000004cm,-0.8cm) rectangle (3.2cm,0cm);
+  \node at (2.8000000000000003cm,-0.4cm) {20};
+  \filldraw[fill=white] (3.2cm,-0.8cm) rectangle (4cm,0cm);
+  \node at (3.6cm,-0.4cm) {25};
+  \filldraw[fill=white] (4cm,-0.8cm) rectangle (4.8cm,0cm);
+  \node at (4.4cm,-0.4cm) {18};
+  \filldraw[fill=white] (4.800000000000001cm,-0.8cm) rectangle (5.6000000000000005cm,0cm);
+  \node at (5.200000000000001cm,-0.4cm) {12};
+  \filldraw[fill=white] (0cm,-1.6cm) rectangle (0.8cm,-0.8cm);
+  \node at (0.4cm,-1.2000000000000002cm) {10};
+  \filldraw[fill=white] (0.8cm,-1.6cm) rectangle (1.6cm,-0.8cm);
+  \node at (1.2000000000000002cm,-1.2000000000000002cm) {0};
+  \filldraw[fill=white] (1.6cm,-1.6cm) rectangle (2.4000000000000004cm,-0.8cm);
+  \node at (2cm,-1.2000000000000002cm) {35};
+  \filldraw[fill=white] (2.4000000000000004cm,-1.6cm) rectangle (3.2cm,-0.8cm);
+  \node at (2.8000000000000003cm,-1.2000000000000002cm) {25};
+  \filldraw[fill=white] (3.2cm,-1.6cm) rectangle (4cm,-0.8cm);
+  \node at (3.6cm,-1.2000000000000002cm) {30};
+  \filldraw[fill=white] (4cm,-1.6cm) rectangle (4.8cm,-0.8cm);
+  \node at (4.4cm,-1.2000000000000002cm) {22};
+  \filldraw[fill=white] (4.800000000000001cm,-1.6cm) rectangle (5.6000000000000005cm,-0.8cm);
+  \node at (5.200000000000001cm,-1.2000000000000002cm) {28};
+  \filldraw[fill=white] (0cm,-2.4000000000000004cm) rectangle (0.8cm,-1.6cm);
+  \node at (0.4cm,-2cm) {15};
+  \filldraw[fill=white] (0.8cm,-2.4000000000000004cm) rectangle (1.6cm,-1.6cm);
+  \node at (1.2000000000000002cm,-2cm) {35};
+  \filldraw[fill=white] (1.6cm,-2.4000000000000004cm) rectangle (2.4000000000000004cm,-1.6cm);
+  \node at (2cm,-2cm) {0};
+  \filldraw[fill=white] (2.4000000000000004cm,-2.4000000000000004cm) rectangle (3.2cm,-1.6cm);
+  \node at (2.8000000000000003cm,-2cm) {30};
+  \filldraw[fill=white] (3.2cm,-2.4000000000000004cm) rectangle (4cm,-1.6cm);
+  \node at (3.6cm,-2cm) {16};
+  \filldraw[fill=white] (4cm,-2.4000000000000004cm) rectangle (4.8cm,-1.6cm);
+  \node at (4.4cm,-2cm) {24};
+  \filldraw[fill=white] (4.800000000000001cm,-2.4000000000000004cm) rectangle (5.6000000000000005cm,-1.6cm);
+  \node at (5.200000000000001cm,-2cm) {20};
+  \filldraw[fill=white] (0cm,-3.2cm) rectangle (0.8cm,-2.4000000000000004cm);
+  \node at (0.4cm,-2.8000000000000003cm) {20};
+  \filldraw[fill=white] (0.8cm,-3.2cm) rectangle (1.6cm,-2.4000000000000004cm);
+  \node at (1.2000000000000002cm,-2.8000000000000003cm) {25};
+  \filldraw[fill=white] (1.6cm,-3.2cm) rectangle (2.4000000000000004cm,-2.4000000000000004cm);
+  \node at (2cm,-2.8000000000000003cm) {30};
+  \filldraw[fill=white] (2.4000000000000004cm,-3.2cm) rectangle (3.2cm,-2.4000000000000004cm);
+  \node at (2.8000000000000003cm,-2.8000000000000003cm) {0};
+  \filldraw[fill=white] (3.2cm,-3.2cm) rectangle (4cm,-2.4000000000000004cm);
+  \node at (3.6cm,-2.8000000000000003cm) {18};
+  \filldraw[fill=white] (4cm,-3.2cm) rectangle (4.8cm,-2.4000000000000004cm);
+  \node at (4.4cm,-2.8000000000000003cm) {27};
+  \filldraw[fill=white] (4.800000000000001cm,-3.2cm) rectangle (5.6000000000000005cm,-2.4000000000000004cm);
+  \node at (5.200000000000001cm,-2.8000000000000003cm) {14};
+  \filldraw[fill=white] (0cm,-4cm) rectangle (0.8cm,-3.2cm);
+  \node at (0.4cm,-3.6cm) {25};
+  \filldraw[fill=white] (0.8cm,-4cm) rectangle (1.6cm,-3.2cm);
+  \node at (1.2000000000000002cm,-3.6cm) {30};
+  \filldraw[fill=white] (1.6cm,-4cm) rectangle (2.4000000000000004cm,-3.2cm);
+  \node at (2cm,-3.6cm) {16};
+  \filldraw[fill=white] (2.4000000000000004cm,-4cm) rectangle (3.2cm,-3.2cm);
+  \node at (2.8000000000000003cm,-3.6cm) {18};
+  \filldraw[fill=white] (3.2cm,-4cm) rectangle (4cm,-3.2cm);
+  \node at (3.6cm,-3.6cm) {0};
+  \filldraw[fill=white] (4cm,-4cm) rectangle (4.8cm,-3.2cm);
+  \node at (4.4cm,-3.6cm) {12};
+  \filldraw[fill=white] (4.800000000000001cm,-4cm) rectangle (5.6000000000000005cm,-3.2cm);
+  \node at (5.200000000000001cm,-3.6cm) {22};
+  \filldraw[fill=white] (0cm,-4.8cm) rectangle (0.8cm,-4cm);
+  \node at (0.4cm,-4.4cm) {18};
+  \filldraw[fill=white] (0.8cm,-4.8cm) rectangle (1.6cm,-4cm);
+  \node at (1.2000000000000002cm,-4.4cm) {22};
+  \filldraw[fill=white] (1.6cm,-4.8cm) rectangle (2.4000000000000004cm,-4cm);
+  \node at (2cm,-4.4cm) {24};
+  \filldraw[fill=white] (2.4000000000000004cm,-4.8cm) rectangle (3.2cm,-4cm);
+  \node at (2.8000000000000003cm,-4.4cm) {27};
+  \filldraw[fill=white] (3.2cm,-4.8cm) rectangle (4cm,-4cm);
+  \node at (3.6cm,-4.4cm) {12};
+  \filldraw[fill=white] (4cm,-4.8cm) rectangle (4.8cm,-4cm);
+  \node at (4.4cm,-4.4cm) {0};
+  \filldraw[fill=white] (4.800000000000001cm,-4.8cm) rectangle (5.6000000000000005cm,-4cm);
+  \node at (5.200000000000001cm,-4.4cm) {26};
+  \filldraw[fill=white] (0cm,-5.6000000000000005cm) rectangle (0.8cm,-4.800000000000001cm);
+  \node at (0.4cm,-5.200000000000001cm) {12};
+  \filldraw[fill=white] (0.8cm,-5.6000000000000005cm) rectangle (1.6cm,-4.800000000000001cm);
+  \node at (1.2000000000000002cm,-5.200000000000001cm) {28};
+  \filldraw[fill=white] (1.6cm,-5.6000000000000005cm) rectangle (2.4000000000000004cm,-4.800000000000001cm);
+  \node at (2cm,-5.200000000000001cm) {20};
+  \filldraw[fill=white] (2.4000000000000004cm,-5.6000000000000005cm) rectangle (3.2cm,-4.800000000000001cm);
+  \node at (2.8000000000000003cm,-5.200000000000001cm) {14};
+  \filldraw[fill=white] (3.2cm,-5.6000000000000005cm) rectangle (4cm,-4.800000000000001cm);
+  \node at (3.6cm,-5.200000000000001cm) {22};
+  \filldraw[fill=white] (4cm,-5.6000000000000005cm) rectangle (4.8cm,-4.800000000000001cm);
+  \node at (4.4cm,-5.200000000000001cm) {26};
+  \filldraw[fill=white] (4.800000000000001cm,-5.6000000000000005cm) rectangle (5.6000000000000005cm,-4.800000000000001cm);
+  \node at (5.200000000000001cm,-5.200000000000001cm) {0};
+\end{tikzpicture}
+\end{center}
+\noindent\rule{\linewidth}{0.3pt}
+\begin{center}
+\begin{flushleft}\textbf{Tour Cost}\\[1.75mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (0cm,0) rectangle (0.5cm,3.5cm);
+  \filldraw[fill=gray!30] (0cm,0) rectangle (0.5cm,3.5cm);
+  \node[above] at (0.25cm,3.5cm) {10};
+\end{tikzpicture}
+\end{center}
+\newpage
+% --- Frame 3 ---
+\begin{center}\LARGE\textbf{TSP}\\[6mm]\end{center}
+\begin{center}
+\begin{flushleft}\textbf{TSP Log}\\[1.75mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (0,0) rectangle (10cm, -0.25cm);
+  \node[anchor=north, align=center, text=black] at (5cm,0) {\texttt{Move to F with distance 22}};
+\end{tikzpicture}
+\end{center}
+\noindent\rule{\linewidth}{0.3pt}
+\begin{center}
+\begin{flushleft}\textbf{TSP Graph}\\[2mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (-4cm,0) rectangle (4cm, -3cm);
+  \node[circle, draw, minimum size=8mm, fill=blue!20] (A) at (0.0:3cm) {A};
+  \node[circle, draw, minimum size=8mm, fill=blue!20] (B) at (51.4:3cm) {B};
+  \node[circle, draw, minimum size=8mm, fill=white] (C) at (102.9:3cm) {C};
+  \node[circle, draw, minimum size=8mm, fill=white] (D) at (154.3:3cm) {D};
+  \node[circle, draw, minimum size=8mm, fill=white] (E) at (205.7:3cm) {E};
+  \node[circle, draw, minimum size=8mm, fill=blue!50] (F) at (257.1:3cm) {F};
+  \node[circle, draw, minimum size=8mm, fill=white] (G) at (308.6:3cm) {G};
+  \draw[green!100, line width=1.2pt] (A) -- node[midway, sloped, above] {10} (B);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {15} (C);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {20} (D);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {25} (E);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {18} (F);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {12} (G);
+  \draw[black, line width=1.2pt] (B) -- node[midway, sloped, above] {35} (C);
+  \draw[black, line width=1.2pt] (B) -- node[midway, sloped, above] {25} (D);
+  \draw[black, line width=1.2pt] (B) -- node[midway, sloped, above] {30} (E);
+  \draw[green!100, line width=1.2pt] (B) -- node[midway, sloped, above] {22} (F);
+  \draw[black, line width=1.2pt] (B) -- node[midway, sloped, above] {28} (G);
+  \draw[black, line width=1.2pt] (C) -- node[midway, sloped, above] {30} (D);
+  \draw[black, line width=1.2pt] (C) -- node[midway, sloped, above] {16} (E);
+  \draw[black, line width=1.2pt] (C) -- node[midway, sloped, above] {24} (F);
+  \draw[black, line width=1.2pt] (C) -- node[midway, sloped, above] {20} (G);
+  \draw[black, line width=1.2pt] (D) -- node[midway, sloped, above] {18} (E);
+  \draw[black, line width=1.2pt] (D) -- node[midway, sloped, above] {27} (F);
+  \draw[black, line width=1.2pt] (D) -- node[midway, sloped, above] {14} (G);
+  \draw[black, line width=1.2pt] (E) -- node[midway, sloped, above] {12} (F);
+  \draw[black, line width=1.2pt] (E) -- node[midway, sloped, above] {22} (G);
+  \draw[black, line width=1.2pt] (F) -- node[midway, sloped, above] {26} (G);
+\end{tikzpicture}
+\end{center}
+\noindent\rule{\linewidth}{0.3pt}
+\begin{center}
+\begin{flushleft}\textbf{Distance Matrix}\\[1.75mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (0cm,0cm) rectangle (5.6000000000000005cm, -5.6000000000000005cm);
+  \filldraw[fill=white] (0cm,-0.8cm) rectangle (0.8cm,0cm);
+  \node at (0.4cm,-0.4cm) {0};
+  \filldraw[fill=white] (0.8cm,-0.8cm) rectangle (1.6cm,0cm);
+  \node at (1.2000000000000002cm,-0.4cm) {10};
+  \filldraw[fill=white] (1.6cm,-0.8cm) rectangle (2.4000000000000004cm,0cm);
+  \node at (2cm,-0.4cm) {15};
+  \filldraw[fill=white] (2.4000000000000004cm,-0.8cm) rectangle (3.2cm,0cm);
+  \node at (2.8000000000000003cm,-0.4cm) {20};
+  \filldraw[fill=white] (3.2cm,-0.8cm) rectangle (4cm,0cm);
+  \node at (3.6cm,-0.4cm) {25};
+  \filldraw[fill=white] (4cm,-0.8cm) rectangle (4.8cm,0cm);
+  \node at (4.4cm,-0.4cm) {18};
+  \filldraw[fill=white] (4.800000000000001cm,-0.8cm) rectangle (5.6000000000000005cm,0cm);
+  \node at (5.200000000000001cm,-0.4cm) {12};
+  \filldraw[fill=white] (0cm,-1.6cm) rectangle (0.8cm,-0.8cm);
+  \node at (0.4cm,-1.2000000000000002cm) {10};
+  \filldraw[fill=white] (0.8cm,-1.6cm) rectangle (1.6cm,-0.8cm);
+  \node at (1.2000000000000002cm,-1.2000000000000002cm) {0};
+  \filldraw[fill=white] (1.6cm,-1.6cm) rectangle (2.4000000000000004cm,-0.8cm);
+  \node at (2cm,-1.2000000000000002cm) {35};
+  \filldraw[fill=white] (2.4000000000000004cm,-1.6cm) rectangle (3.2cm,-0.8cm);
+  \node at (2.8000000000000003cm,-1.2000000000000002cm) {25};
+  \filldraw[fill=white] (3.2cm,-1.6cm) rectangle (4cm,-0.8cm);
+  \node at (3.6cm,-1.2000000000000002cm) {30};
+  \filldraw[fill=white] (4cm,-1.6cm) rectangle (4.8cm,-0.8cm);
+  \node at (4.4cm,-1.2000000000000002cm) {22};
+  \filldraw[fill=white] (4.800000000000001cm,-1.6cm) rectangle (5.6000000000000005cm,-0.8cm);
+  \node at (5.200000000000001cm,-1.2000000000000002cm) {28};
+  \filldraw[fill=white] (0cm,-2.4000000000000004cm) rectangle (0.8cm,-1.6cm);
+  \node at (0.4cm,-2cm) {15};
+  \filldraw[fill=white] (0.8cm,-2.4000000000000004cm) rectangle (1.6cm,-1.6cm);
+  \node at (1.2000000000000002cm,-2cm) {35};
+  \filldraw[fill=white] (1.6cm,-2.4000000000000004cm) rectangle (2.4000000000000004cm,-1.6cm);
+  \node at (2cm,-2cm) {0};
+  \filldraw[fill=white] (2.4000000000000004cm,-2.4000000000000004cm) rectangle (3.2cm,-1.6cm);
+  \node at (2.8000000000000003cm,-2cm) {30};
+  \filldraw[fill=white] (3.2cm,-2.4000000000000004cm) rectangle (4cm,-1.6cm);
+  \node at (3.6cm,-2cm) {16};
+  \filldraw[fill=white] (4cm,-2.4000000000000004cm) rectangle (4.8cm,-1.6cm);
+  \node at (4.4cm,-2cm) {24};
+  \filldraw[fill=white] (4.800000000000001cm,-2.4000000000000004cm) rectangle (5.6000000000000005cm,-1.6cm);
+  \node at (5.200000000000001cm,-2cm) {20};
+  \filldraw[fill=white] (0cm,-3.2cm) rectangle (0.8cm,-2.4000000000000004cm);
+  \node at (0.4cm,-2.8000000000000003cm) {20};
+  \filldraw[fill=white] (0.8cm,-3.2cm) rectangle (1.6cm,-2.4000000000000004cm);
+  \node at (1.2000000000000002cm,-2.8000000000000003cm) {25};
+  \filldraw[fill=white] (1.6cm,-3.2cm) rectangle (2.4000000000000004cm,-2.4000000000000004cm);
+  \node at (2cm,-2.8000000000000003cm) {30};
+  \filldraw[fill=white] (2.4000000000000004cm,-3.2cm) rectangle (3.2cm,-2.4000000000000004cm);
+  \node at (2.8000000000000003cm,-2.8000000000000003cm) {0};
+  \filldraw[fill=white] (3.2cm,-3.2cm) rectangle (4cm,-2.4000000000000004cm);
+  \node at (3.6cm,-2.8000000000000003cm) {18};
+  \filldraw[fill=white] (4cm,-3.2cm) rectangle (4.8cm,-2.4000000000000004cm);
+  \node at (4.4cm,-2.8000000000000003cm) {27};
+  \filldraw[fill=white] (4.800000000000001cm,-3.2cm) rectangle (5.6000000000000005cm,-2.4000000000000004cm);
+  \node at (5.200000000000001cm,-2.8000000000000003cm) {14};
+  \filldraw[fill=white] (0cm,-4cm) rectangle (0.8cm,-3.2cm);
+  \node at (0.4cm,-3.6cm) {25};
+  \filldraw[fill=white] (0.8cm,-4cm) rectangle (1.6cm,-3.2cm);
+  \node at (1.2000000000000002cm,-3.6cm) {30};
+  \filldraw[fill=white] (1.6cm,-4cm) rectangle (2.4000000000000004cm,-3.2cm);
+  \node at (2cm,-3.6cm) {16};
+  \filldraw[fill=white] (2.4000000000000004cm,-4cm) rectangle (3.2cm,-3.2cm);
+  \node at (2.8000000000000003cm,-3.6cm) {18};
+  \filldraw[fill=white] (3.2cm,-4cm) rectangle (4cm,-3.2cm);
+  \node at (3.6cm,-3.6cm) {0};
+  \filldraw[fill=white] (4cm,-4cm) rectangle (4.8cm,-3.2cm);
+  \node at (4.4cm,-3.6cm) {12};
+  \filldraw[fill=white] (4.800000000000001cm,-4cm) rectangle (5.6000000000000005cm,-3.2cm);
+  \node at (5.200000000000001cm,-3.6cm) {22};
+  \filldraw[fill=white] (0cm,-4.8cm) rectangle (0.8cm,-4cm);
+  \node at (0.4cm,-4.4cm) {18};
+  \filldraw[fill=white] (0.8cm,-4.8cm) rectangle (1.6cm,-4cm);
+  \node at (1.2000000000000002cm,-4.4cm) {22};
+  \filldraw[fill=white] (1.6cm,-4.8cm) rectangle (2.4000000000000004cm,-4cm);
+  \node at (2cm,-4.4cm) {24};
+  \filldraw[fill=white] (2.4000000000000004cm,-4.8cm) rectangle (3.2cm,-4cm);
+  \node at (2.8000000000000003cm,-4.4cm) {27};
+  \filldraw[fill=white] (3.2cm,-4.8cm) rectangle (4cm,-4cm);
+  \node at (3.6cm,-4.4cm) {12};
+  \filldraw[fill=white] (4cm,-4.8cm) rectangle (4.8cm,-4cm);
+  \node at (4.4cm,-4.4cm) {0};
+  \filldraw[fill=white] (4.800000000000001cm,-4.8cm) rectangle (5.6000000000000005cm,-4cm);
+  \node at (5.200000000000001cm,-4.4cm) {26};
+  \filldraw[fill=white] (0cm,-5.6000000000000005cm) rectangle (0.8cm,-4.800000000000001cm);
+  \node at (0.4cm,-5.200000000000001cm) {12};
+  \filldraw[fill=white] (0.8cm,-5.6000000000000005cm) rectangle (1.6cm,-4.800000000000001cm);
+  \node at (1.2000000000000002cm,-5.200000000000001cm) {28};
+  \filldraw[fill=white] (1.6cm,-5.6000000000000005cm) rectangle (2.4000000000000004cm,-4.800000000000001cm);
+  \node at (2cm,-5.200000000000001cm) {20};
+  \filldraw[fill=white] (2.4000000000000004cm,-5.6000000000000005cm) rectangle (3.2cm,-4.800000000000001cm);
+  \node at (2.8000000000000003cm,-5.200000000000001cm) {14};
+  \filldraw[fill=white] (3.2cm,-5.6000000000000005cm) rectangle (4cm,-4.800000000000001cm);
+  \node at (3.6cm,-5.200000000000001cm) {22};
+  \filldraw[fill=white] (4cm,-5.6000000000000005cm) rectangle (4.8cm,-4.800000000000001cm);
+  \node at (4.4cm,-5.200000000000001cm) {26};
+  \filldraw[fill=white] (4.800000000000001cm,-5.6000000000000005cm) rectangle (5.6000000000000005cm,-4.800000000000001cm);
+  \node at (5.200000000000001cm,-5.200000000000001cm) {0};
+\end{tikzpicture}
+\end{center}
+\noindent\rule{\linewidth}{0.3pt}
+\begin{center}
+\begin{flushleft}\textbf{Tour Cost}\\[1.75mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (0cm,0) rectangle (0.5cm,3.5cm);
+  \filldraw[fill=gray!30] (0cm,0) rectangle (0.5cm,1.5909090909090908cm);
+  \node[above] at (0.25cm,1.5909090909090908cm) {10};
+  \filldraw[fill=white!0, draw=none] (0.7cm,0) rectangle (1.2cm,3.5cm);
+  \filldraw[fill=gray!30] (0.7cm,0) rectangle (1.2cm,3.5cm);
+  \node[above] at (0.95cm,3.5cm) {22};
+\end{tikzpicture}
+\end{center}
+\newpage
+% --- Frame 4 ---
+\begin{center}\LARGE\textbf{TSP}\\[6mm]\end{center}
+\begin{center}
+\begin{flushleft}\textbf{TSP Log}\\[1.75mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (0,0) rectangle (10cm, -0.25cm);
+  \node[anchor=north, align=center, text=black] at (5cm,0) {\texttt{Move to E with distance 12}};
+\end{tikzpicture}
+\end{center}
+\noindent\rule{\linewidth}{0.3pt}
+\begin{center}
+\begin{flushleft}\textbf{TSP Graph}\\[2mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (-4cm,0) rectangle (4cm, -3cm);
+  \node[circle, draw, minimum size=8mm, fill=blue!20] (A) at (0.0:3cm) {A};
+  \node[circle, draw, minimum size=8mm, fill=blue!20] (B) at (51.4:3cm) {B};
+  \node[circle, draw, minimum size=8mm, fill=white] (C) at (102.9:3cm) {C};
+  \node[circle, draw, minimum size=8mm, fill=white] (D) at (154.3:3cm) {D};
+  \node[circle, draw, minimum size=8mm, fill=blue!50] (E) at (205.7:3cm) {E};
+  \node[circle, draw, minimum size=8mm, fill=blue!20] (F) at (257.1:3cm) {F};
+  \node[circle, draw, minimum size=8mm, fill=white] (G) at (308.6:3cm) {G};
+  \draw[green!100, line width=1.2pt] (A) -- node[midway, sloped, above] {10} (B);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {15} (C);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {20} (D);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {25} (E);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {18} (F);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {12} (G);
+  \draw[black, line width=1.2pt] (B) -- node[midway, sloped, above] {35} (C);
+  \draw[black, line width=1.2pt] (B) -- node[midway, sloped, above] {25} (D);
+  \draw[black, line width=1.2pt] (B) -- node[midway, sloped, above] {30} (E);
+  \draw[green!100, line width=1.2pt] (B) -- node[midway, sloped, above] {22} (F);
+  \draw[black, line width=1.2pt] (B) -- node[midway, sloped, above] {28} (G);
+  \draw[black, line width=1.2pt] (C) -- node[midway, sloped, above] {30} (D);
+  \draw[black, line width=1.2pt] (C) -- node[midway, sloped, above] {16} (E);
+  \draw[black, line width=1.2pt] (C) -- node[midway, sloped, above] {24} (F);
+  \draw[black, line width=1.2pt] (C) -- node[midway, sloped, above] {20} (G);
+  \draw[black, line width=1.2pt] (D) -- node[midway, sloped, above] {18} (E);
+  \draw[black, line width=1.2pt] (D) -- node[midway, sloped, above] {27} (F);
+  \draw[black, line width=1.2pt] (D) -- node[midway, sloped, above] {14} (G);
+  \draw[green!100, line width=1.2pt] (E) -- node[midway, sloped, above] {12} (F);
+  \draw[black, line width=1.2pt] (E) -- node[midway, sloped, above] {22} (G);
+  \draw[black, line width=1.2pt] (F) -- node[midway, sloped, above] {26} (G);
+\end{tikzpicture}
+\end{center}
+\noindent\rule{\linewidth}{0.3pt}
+\begin{center}
+\begin{flushleft}\textbf{Distance Matrix}\\[1.75mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (0cm,0cm) rectangle (5.6000000000000005cm, -5.6000000000000005cm);
+  \filldraw[fill=white] (0cm,-0.8cm) rectangle (0.8cm,0cm);
+  \node at (0.4cm,-0.4cm) {0};
+  \filldraw[fill=white] (0.8cm,-0.8cm) rectangle (1.6cm,0cm);
+  \node at (1.2000000000000002cm,-0.4cm) {10};
+  \filldraw[fill=white] (1.6cm,-0.8cm) rectangle (2.4000000000000004cm,0cm);
+  \node at (2cm,-0.4cm) {15};
+  \filldraw[fill=white] (2.4000000000000004cm,-0.8cm) rectangle (3.2cm,0cm);
+  \node at (2.8000000000000003cm,-0.4cm) {20};
+  \filldraw[fill=white] (3.2cm,-0.8cm) rectangle (4cm,0cm);
+  \node at (3.6cm,-0.4cm) {25};
+  \filldraw[fill=white] (4cm,-0.8cm) rectangle (4.8cm,0cm);
+  \node at (4.4cm,-0.4cm) {18};
+  \filldraw[fill=white] (4.800000000000001cm,-0.8cm) rectangle (5.6000000000000005cm,0cm);
+  \node at (5.200000000000001cm,-0.4cm) {12};
+  \filldraw[fill=white] (0cm,-1.6cm) rectangle (0.8cm,-0.8cm);
+  \node at (0.4cm,-1.2000000000000002cm) {10};
+  \filldraw[fill=white] (0.8cm,-1.6cm) rectangle (1.6cm,-0.8cm);
+  \node at (1.2000000000000002cm,-1.2000000000000002cm) {0};
+  \filldraw[fill=white] (1.6cm,-1.6cm) rectangle (2.4000000000000004cm,-0.8cm);
+  \node at (2cm,-1.2000000000000002cm) {35};
+  \filldraw[fill=white] (2.4000000000000004cm,-1.6cm) rectangle (3.2cm,-0.8cm);
+  \node at (2.8000000000000003cm,-1.2000000000000002cm) {25};
+  \filldraw[fill=white] (3.2cm,-1.6cm) rectangle (4cm,-0.8cm);
+  \node at (3.6cm,-1.2000000000000002cm) {30};
+  \filldraw[fill=white] (4cm,-1.6cm) rectangle (4.8cm,-0.8cm);
+  \node at (4.4cm,-1.2000000000000002cm) {22};
+  \filldraw[fill=white] (4.800000000000001cm,-1.6cm) rectangle (5.6000000000000005cm,-0.8cm);
+  \node at (5.200000000000001cm,-1.2000000000000002cm) {28};
+  \filldraw[fill=white] (0cm,-2.4000000000000004cm) rectangle (0.8cm,-1.6cm);
+  \node at (0.4cm,-2cm) {15};
+  \filldraw[fill=white] (0.8cm,-2.4000000000000004cm) rectangle (1.6cm,-1.6cm);
+  \node at (1.2000000000000002cm,-2cm) {35};
+  \filldraw[fill=white] (1.6cm,-2.4000000000000004cm) rectangle (2.4000000000000004cm,-1.6cm);
+  \node at (2cm,-2cm) {0};
+  \filldraw[fill=white] (2.4000000000000004cm,-2.4000000000000004cm) rectangle (3.2cm,-1.6cm);
+  \node at (2.8000000000000003cm,-2cm) {30};
+  \filldraw[fill=white] (3.2cm,-2.4000000000000004cm) rectangle (4cm,-1.6cm);
+  \node at (3.6cm,-2cm) {16};
+  \filldraw[fill=white] (4cm,-2.4000000000000004cm) rectangle (4.8cm,-1.6cm);
+  \node at (4.4cm,-2cm) {24};
+  \filldraw[fill=white] (4.800000000000001cm,-2.4000000000000004cm) rectangle (5.6000000000000005cm,-1.6cm);
+  \node at (5.200000000000001cm,-2cm) {20};
+  \filldraw[fill=white] (0cm,-3.2cm) rectangle (0.8cm,-2.4000000000000004cm);
+  \node at (0.4cm,-2.8000000000000003cm) {20};
+  \filldraw[fill=white] (0.8cm,-3.2cm) rectangle (1.6cm,-2.4000000000000004cm);
+  \node at (1.2000000000000002cm,-2.8000000000000003cm) {25};
+  \filldraw[fill=white] (1.6cm,-3.2cm) rectangle (2.4000000000000004cm,-2.4000000000000004cm);
+  \node at (2cm,-2.8000000000000003cm) {30};
+  \filldraw[fill=white] (2.4000000000000004cm,-3.2cm) rectangle (3.2cm,-2.4000000000000004cm);
+  \node at (2.8000000000000003cm,-2.8000000000000003cm) {0};
+  \filldraw[fill=white] (3.2cm,-3.2cm) rectangle (4cm,-2.4000000000000004cm);
+  \node at (3.6cm,-2.8000000000000003cm) {18};
+  \filldraw[fill=white] (4cm,-3.2cm) rectangle (4.8cm,-2.4000000000000004cm);
+  \node at (4.4cm,-2.8000000000000003cm) {27};
+  \filldraw[fill=white] (4.800000000000001cm,-3.2cm) rectangle (5.6000000000000005cm,-2.4000000000000004cm);
+  \node at (5.200000000000001cm,-2.8000000000000003cm) {14};
+  \filldraw[fill=white] (0cm,-4cm) rectangle (0.8cm,-3.2cm);
+  \node at (0.4cm,-3.6cm) {25};
+  \filldraw[fill=white] (0.8cm,-4cm) rectangle (1.6cm,-3.2cm);
+  \node at (1.2000000000000002cm,-3.6cm) {30};
+  \filldraw[fill=white] (1.6cm,-4cm) rectangle (2.4000000000000004cm,-3.2cm);
+  \node at (2cm,-3.6cm) {16};
+  \filldraw[fill=white] (2.4000000000000004cm,-4cm) rectangle (3.2cm,-3.2cm);
+  \node at (2.8000000000000003cm,-3.6cm) {18};
+  \filldraw[fill=white] (3.2cm,-4cm) rectangle (4cm,-3.2cm);
+  \node at (3.6cm,-3.6cm) {0};
+  \filldraw[fill=white] (4cm,-4cm) rectangle (4.8cm,-3.2cm);
+  \node at (4.4cm,-3.6cm) {12};
+  \filldraw[fill=white] (4.800000000000001cm,-4cm) rectangle (5.6000000000000005cm,-3.2cm);
+  \node at (5.200000000000001cm,-3.6cm) {22};
+  \filldraw[fill=white] (0cm,-4.8cm) rectangle (0.8cm,-4cm);
+  \node at (0.4cm,-4.4cm) {18};
+  \filldraw[fill=white] (0.8cm,-4.8cm) rectangle (1.6cm,-4cm);
+  \node at (1.2000000000000002cm,-4.4cm) {22};
+  \filldraw[fill=white] (1.6cm,-4.8cm) rectangle (2.4000000000000004cm,-4cm);
+  \node at (2cm,-4.4cm) {24};
+  \filldraw[fill=white] (2.4000000000000004cm,-4.8cm) rectangle (3.2cm,-4cm);
+  \node at (2.8000000000000003cm,-4.4cm) {27};
+  \filldraw[fill=white] (3.2cm,-4.8cm) rectangle (4cm,-4cm);
+  \node at (3.6cm,-4.4cm) {12};
+  \filldraw[fill=white] (4cm,-4.8cm) rectangle (4.8cm,-4cm);
+  \node at (4.4cm,-4.4cm) {0};
+  \filldraw[fill=white] (4.800000000000001cm,-4.8cm) rectangle (5.6000000000000005cm,-4cm);
+  \node at (5.200000000000001cm,-4.4cm) {26};
+  \filldraw[fill=white] (0cm,-5.6000000000000005cm) rectangle (0.8cm,-4.800000000000001cm);
+  \node at (0.4cm,-5.200000000000001cm) {12};
+  \filldraw[fill=white] (0.8cm,-5.6000000000000005cm) rectangle (1.6cm,-4.800000000000001cm);
+  \node at (1.2000000000000002cm,-5.200000000000001cm) {28};
+  \filldraw[fill=white] (1.6cm,-5.6000000000000005cm) rectangle (2.4000000000000004cm,-4.800000000000001cm);
+  \node at (2cm,-5.200000000000001cm) {20};
+  \filldraw[fill=white] (2.4000000000000004cm,-5.6000000000000005cm) rectangle (3.2cm,-4.800000000000001cm);
+  \node at (2.8000000000000003cm,-5.200000000000001cm) {14};
+  \filldraw[fill=white] (3.2cm,-5.6000000000000005cm) rectangle (4cm,-4.800000000000001cm);
+  \node at (3.6cm,-5.200000000000001cm) {22};
+  \filldraw[fill=white] (4cm,-5.6000000000000005cm) rectangle (4.8cm,-4.800000000000001cm);
+  \node at (4.4cm,-5.200000000000001cm) {26};
+  \filldraw[fill=white] (4.800000000000001cm,-5.6000000000000005cm) rectangle (5.6000000000000005cm,-4.800000000000001cm);
+  \node at (5.200000000000001cm,-5.200000000000001cm) {0};
+\end{tikzpicture}
+\end{center}
+\noindent\rule{\linewidth}{0.3pt}
+\begin{center}
+\begin{flushleft}\textbf{Tour Cost}\\[1.75mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (0cm,0) rectangle (0.5cm,3.5cm);
+  \filldraw[fill=gray!30] (0cm,0) rectangle (0.5cm,1.5909090909090908cm);
+  \node[above] at (0.25cm,1.5909090909090908cm) {10};
+  \filldraw[fill=white!0, draw=none] (0.7cm,0) rectangle (1.2cm,3.5cm);
+  \filldraw[fill=gray!30] (0.7cm,0) rectangle (1.2cm,3.5cm);
+  \node[above] at (0.95cm,3.5cm) {22};
+  \filldraw[fill=white!0, draw=none] (1.4cm,0) rectangle (1.9cm,3.5cm);
+  \filldraw[fill=gray!30] (1.4cm,0) rectangle (1.9cm,1.9090909090909092cm);
+  \node[above] at (1.65cm,1.9090909090909092cm) {12};
+\end{tikzpicture}
+\end{center}
+\newpage
+% --- Frame 5 ---
+\begin{center}\LARGE\textbf{TSP}\\[6mm]\end{center}
+\begin{center}
+\begin{flushleft}\textbf{TSP Log}\\[1.75mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (0,0) rectangle (10cm, -0.25cm);
+  \node[anchor=north, align=center, text=black] at (5cm,0) {\texttt{Move to C with distance 16}};
+\end{tikzpicture}
+\end{center}
+\noindent\rule{\linewidth}{0.3pt}
+\begin{center}
+\begin{flushleft}\textbf{TSP Graph}\\[2mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (-4cm,0) rectangle (4cm, -3cm);
+  \node[circle, draw, minimum size=8mm, fill=blue!20] (A) at (0.0:3cm) {A};
+  \node[circle, draw, minimum size=8mm, fill=blue!20] (B) at (51.4:3cm) {B};
+  \node[circle, draw, minimum size=8mm, fill=blue!50] (C) at (102.9:3cm) {C};
+  \node[circle, draw, minimum size=8mm, fill=white] (D) at (154.3:3cm) {D};
+  \node[circle, draw, minimum size=8mm, fill=blue!20] (E) at (205.7:3cm) {E};
+  \node[circle, draw, minimum size=8mm, fill=blue!20] (F) at (257.1:3cm) {F};
+  \node[circle, draw, minimum size=8mm, fill=white] (G) at (308.6:3cm) {G};
+  \draw[green!100, line width=1.2pt] (A) -- node[midway, sloped, above] {10} (B);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {15} (C);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {20} (D);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {25} (E);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {18} (F);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {12} (G);
+  \draw[black, line width=1.2pt] (B) -- node[midway, sloped, above] {35} (C);
+  \draw[black, line width=1.2pt] (B) -- node[midway, sloped, above] {25} (D);
+  \draw[black, line width=1.2pt] (B) -- node[midway, sloped, above] {30} (E);
+  \draw[green!100, line width=1.2pt] (B) -- node[midway, sloped, above] {22} (F);
+  \draw[black, line width=1.2pt] (B) -- node[midway, sloped, above] {28} (G);
+  \draw[black, line width=1.2pt] (C) -- node[midway, sloped, above] {30} (D);
+  \draw[green!100, line width=1.2pt] (C) -- node[midway, sloped, above] {16} (E);
+  \draw[black, line width=1.2pt] (C) -- node[midway, sloped, above] {24} (F);
+  \draw[black, line width=1.2pt] (C) -- node[midway, sloped, above] {20} (G);
+  \draw[black, line width=1.2pt] (D) -- node[midway, sloped, above] {18} (E);
+  \draw[black, line width=1.2pt] (D) -- node[midway, sloped, above] {27} (F);
+  \draw[black, line width=1.2pt] (D) -- node[midway, sloped, above] {14} (G);
+  \draw[green!100, line width=1.2pt] (E) -- node[midway, sloped, above] {12} (F);
+  \draw[black, line width=1.2pt] (E) -- node[midway, sloped, above] {22} (G);
+  \draw[black, line width=1.2pt] (F) -- node[midway, sloped, above] {26} (G);
+\end{tikzpicture}
+\end{center}
+\noindent\rule{\linewidth}{0.3pt}
+\begin{center}
+\begin{flushleft}\textbf{Distance Matrix}\\[1.75mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (0cm,0cm) rectangle (5.6000000000000005cm, -5.6000000000000005cm);
+  \filldraw[fill=white] (0cm,-0.8cm) rectangle (0.8cm,0cm);
+  \node at (0.4cm,-0.4cm) {0};
+  \filldraw[fill=white] (0.8cm,-0.8cm) rectangle (1.6cm,0cm);
+  \node at (1.2000000000000002cm,-0.4cm) {10};
+  \filldraw[fill=white] (1.6cm,-0.8cm) rectangle (2.4000000000000004cm,0cm);
+  \node at (2cm,-0.4cm) {15};
+  \filldraw[fill=white] (2.4000000000000004cm,-0.8cm) rectangle (3.2cm,0cm);
+  \node at (2.8000000000000003cm,-0.4cm) {20};
+  \filldraw[fill=white] (3.2cm,-0.8cm) rectangle (4cm,0cm);
+  \node at (3.6cm,-0.4cm) {25};
+  \filldraw[fill=white] (4cm,-0.8cm) rectangle (4.8cm,0cm);
+  \node at (4.4cm,-0.4cm) {18};
+  \filldraw[fill=white] (4.800000000000001cm,-0.8cm) rectangle (5.6000000000000005cm,0cm);
+  \node at (5.200000000000001cm,-0.4cm) {12};
+  \filldraw[fill=white] (0cm,-1.6cm) rectangle (0.8cm,-0.8cm);
+  \node at (0.4cm,-1.2000000000000002cm) {10};
+  \filldraw[fill=white] (0.8cm,-1.6cm) rectangle (1.6cm,-0.8cm);
+  \node at (1.2000000000000002cm,-1.2000000000000002cm) {0};
+  \filldraw[fill=white] (1.6cm,-1.6cm) rectangle (2.4000000000000004cm,-0.8cm);
+  \node at (2cm,-1.2000000000000002cm) {35};
+  \filldraw[fill=white] (2.4000000000000004cm,-1.6cm) rectangle (3.2cm,-0.8cm);
+  \node at (2.8000000000000003cm,-1.2000000000000002cm) {25};
+  \filldraw[fill=white] (3.2cm,-1.6cm) rectangle (4cm,-0.8cm);
+  \node at (3.6cm,-1.2000000000000002cm) {30};
+  \filldraw[fill=white] (4cm,-1.6cm) rectangle (4.8cm,-0.8cm);
+  \node at (4.4cm,-1.2000000000000002cm) {22};
+  \filldraw[fill=white] (4.800000000000001cm,-1.6cm) rectangle (5.6000000000000005cm,-0.8cm);
+  \node at (5.200000000000001cm,-1.2000000000000002cm) {28};
+  \filldraw[fill=white] (0cm,-2.4000000000000004cm) rectangle (0.8cm,-1.6cm);
+  \node at (0.4cm,-2cm) {15};
+  \filldraw[fill=white] (0.8cm,-2.4000000000000004cm) rectangle (1.6cm,-1.6cm);
+  \node at (1.2000000000000002cm,-2cm) {35};
+  \filldraw[fill=white] (1.6cm,-2.4000000000000004cm) rectangle (2.4000000000000004cm,-1.6cm);
+  \node at (2cm,-2cm) {0};
+  \filldraw[fill=white] (2.4000000000000004cm,-2.4000000000000004cm) rectangle (3.2cm,-1.6cm);
+  \node at (2.8000000000000003cm,-2cm) {30};
+  \filldraw[fill=white] (3.2cm,-2.4000000000000004cm) rectangle (4cm,-1.6cm);
+  \node at (3.6cm,-2cm) {16};
+  \filldraw[fill=white] (4cm,-2.4000000000000004cm) rectangle (4.8cm,-1.6cm);
+  \node at (4.4cm,-2cm) {24};
+  \filldraw[fill=white] (4.800000000000001cm,-2.4000000000000004cm) rectangle (5.6000000000000005cm,-1.6cm);
+  \node at (5.200000000000001cm,-2cm) {20};
+  \filldraw[fill=white] (0cm,-3.2cm) rectangle (0.8cm,-2.4000000000000004cm);
+  \node at (0.4cm,-2.8000000000000003cm) {20};
+  \filldraw[fill=white] (0.8cm,-3.2cm) rectangle (1.6cm,-2.4000000000000004cm);
+  \node at (1.2000000000000002cm,-2.8000000000000003cm) {25};
+  \filldraw[fill=white] (1.6cm,-3.2cm) rectangle (2.4000000000000004cm,-2.4000000000000004cm);
+  \node at (2cm,-2.8000000000000003cm) {30};
+  \filldraw[fill=white] (2.4000000000000004cm,-3.2cm) rectangle (3.2cm,-2.4000000000000004cm);
+  \node at (2.8000000000000003cm,-2.8000000000000003cm) {0};
+  \filldraw[fill=white] (3.2cm,-3.2cm) rectangle (4cm,-2.4000000000000004cm);
+  \node at (3.6cm,-2.8000000000000003cm) {18};
+  \filldraw[fill=white] (4cm,-3.2cm) rectangle (4.8cm,-2.4000000000000004cm);
+  \node at (4.4cm,-2.8000000000000003cm) {27};
+  \filldraw[fill=white] (4.800000000000001cm,-3.2cm) rectangle (5.6000000000000005cm,-2.4000000000000004cm);
+  \node at (5.200000000000001cm,-2.8000000000000003cm) {14};
+  \filldraw[fill=white] (0cm,-4cm) rectangle (0.8cm,-3.2cm);
+  \node at (0.4cm,-3.6cm) {25};
+  \filldraw[fill=white] (0.8cm,-4cm) rectangle (1.6cm,-3.2cm);
+  \node at (1.2000000000000002cm,-3.6cm) {30};
+  \filldraw[fill=white] (1.6cm,-4cm) rectangle (2.4000000000000004cm,-3.2cm);
+  \node at (2cm,-3.6cm) {16};
+  \filldraw[fill=white] (2.4000000000000004cm,-4cm) rectangle (3.2cm,-3.2cm);
+  \node at (2.8000000000000003cm,-3.6cm) {18};
+  \filldraw[fill=white] (3.2cm,-4cm) rectangle (4cm,-3.2cm);
+  \node at (3.6cm,-3.6cm) {0};
+  \filldraw[fill=white] (4cm,-4cm) rectangle (4.8cm,-3.2cm);
+  \node at (4.4cm,-3.6cm) {12};
+  \filldraw[fill=white] (4.800000000000001cm,-4cm) rectangle (5.6000000000000005cm,-3.2cm);
+  \node at (5.200000000000001cm,-3.6cm) {22};
+  \filldraw[fill=white] (0cm,-4.8cm) rectangle (0.8cm,-4cm);
+  \node at (0.4cm,-4.4cm) {18};
+  \filldraw[fill=white] (0.8cm,-4.8cm) rectangle (1.6cm,-4cm);
+  \node at (1.2000000000000002cm,-4.4cm) {22};
+  \filldraw[fill=white] (1.6cm,-4.8cm) rectangle (2.4000000000000004cm,-4cm);
+  \node at (2cm,-4.4cm) {24};
+  \filldraw[fill=white] (2.4000000000000004cm,-4.8cm) rectangle (3.2cm,-4cm);
+  \node at (2.8000000000000003cm,-4.4cm) {27};
+  \filldraw[fill=white] (3.2cm,-4.8cm) rectangle (4cm,-4cm);
+  \node at (3.6cm,-4.4cm) {12};
+  \filldraw[fill=white] (4cm,-4.8cm) rectangle (4.8cm,-4cm);
+  \node at (4.4cm,-4.4cm) {0};
+  \filldraw[fill=white] (4.800000000000001cm,-4.8cm) rectangle (5.6000000000000005cm,-4cm);
+  \node at (5.200000000000001cm,-4.4cm) {26};
+  \filldraw[fill=white] (0cm,-5.6000000000000005cm) rectangle (0.8cm,-4.800000000000001cm);
+  \node at (0.4cm,-5.200000000000001cm) {12};
+  \filldraw[fill=white] (0.8cm,-5.6000000000000005cm) rectangle (1.6cm,-4.800000000000001cm);
+  \node at (1.2000000000000002cm,-5.200000000000001cm) {28};
+  \filldraw[fill=white] (1.6cm,-5.6000000000000005cm) rectangle (2.4000000000000004cm,-4.800000000000001cm);
+  \node at (2cm,-5.200000000000001cm) {20};
+  \filldraw[fill=white] (2.4000000000000004cm,-5.6000000000000005cm) rectangle (3.2cm,-4.800000000000001cm);
+  \node at (2.8000000000000003cm,-5.200000000000001cm) {14};
+  \filldraw[fill=white] (3.2cm,-5.6000000000000005cm) rectangle (4cm,-4.800000000000001cm);
+  \node at (3.6cm,-5.200000000000001cm) {22};
+  \filldraw[fill=white] (4cm,-5.6000000000000005cm) rectangle (4.8cm,-4.800000000000001cm);
+  \node at (4.4cm,-5.200000000000001cm) {26};
+  \filldraw[fill=white] (4.800000000000001cm,-5.6000000000000005cm) rectangle (5.6000000000000005cm,-4.800000000000001cm);
+  \node at (5.200000000000001cm,-5.200000000000001cm) {0};
+\end{tikzpicture}
+\end{center}
+\noindent\rule{\linewidth}{0.3pt}
+\begin{center}
+\begin{flushleft}\textbf{Tour Cost}\\[1.75mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (0cm,0) rectangle (0.5cm,3.5cm);
+  \filldraw[fill=gray!30] (0cm,0) rectangle (0.5cm,1.5909090909090908cm);
+  \node[above] at (0.25cm,1.5909090909090908cm) {10};
+  \filldraw[fill=white!0, draw=none] (0.7cm,0) rectangle (1.2cm,3.5cm);
+  \filldraw[fill=gray!30] (0.7cm,0) rectangle (1.2cm,3.5cm);
+  \node[above] at (0.95cm,3.5cm) {22};
+  \filldraw[fill=white!0, draw=none] (1.4cm,0) rectangle (1.9cm,3.5cm);
+  \filldraw[fill=gray!30] (1.4cm,0) rectangle (1.9cm,1.9090909090909092cm);
+  \node[above] at (1.65cm,1.9090909090909092cm) {12};
+  \filldraw[fill=white!0, draw=none] (2.0999999999999996cm,0) rectangle (2.5999999999999996cm,3.5cm);
+  \filldraw[fill=gray!30] (2.0999999999999996cm,0) rectangle (2.5999999999999996cm,2.5454545454545454cm);
+  \node[above] at (2.3499999999999996cm,2.5454545454545454cm) {16};
+\end{tikzpicture}
+\end{center}
+\newpage
+% --- Frame 6 ---
+\begin{center}\LARGE\textbf{TSP}\\[6mm]\end{center}
+\begin{center}
+\begin{flushleft}\textbf{TSP Log}\\[1.75mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (0,0) rectangle (10cm, -0.25cm);
+  \node[anchor=north, align=center, text=black] at (5cm,0) {\texttt{Move to G with distance 20}};
+\end{tikzpicture}
+\end{center}
+\noindent\rule{\linewidth}{0.3pt}
+\begin{center}
+\begin{flushleft}\textbf{TSP Graph}\\[2mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (-4cm,0) rectangle (4cm, -3cm);
+  \node[circle, draw, minimum size=8mm, fill=blue!20] (A) at (0.0:3cm) {A};
+  \node[circle, draw, minimum size=8mm, fill=blue!20] (B) at (51.4:3cm) {B};
+  \node[circle, draw, minimum size=8mm, fill=blue!20] (C) at (102.9:3cm) {C};
+  \node[circle, draw, minimum size=8mm, fill=white] (D) at (154.3:3cm) {D};
+  \node[circle, draw, minimum size=8mm, fill=blue!20] (E) at (205.7:3cm) {E};
+  \node[circle, draw, minimum size=8mm, fill=blue!20] (F) at (257.1:3cm) {F};
+  \node[circle, draw, minimum size=8mm, fill=blue!50] (G) at (308.6:3cm) {G};
+  \draw[green!100, line width=1.2pt] (A) -- node[midway, sloped, above] {10} (B);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {15} (C);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {20} (D);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {25} (E);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {18} (F);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {12} (G);
+  \draw[black, line width=1.2pt] (B) -- node[midway, sloped, above] {35} (C);
+  \draw[black, line width=1.2pt] (B) -- node[midway, sloped, above] {25} (D);
+  \draw[black, line width=1.2pt] (B) -- node[midway, sloped, above] {30} (E);
+  \draw[green!100, line width=1.2pt] (B) -- node[midway, sloped, above] {22} (F);
+  \draw[black, line width=1.2pt] (B) -- node[midway, sloped, above] {28} (G);
+  \draw[black, line width=1.2pt] (C) -- node[midway, sloped, above] {30} (D);
+  \draw[green!100, line width=1.2pt] (C) -- node[midway, sloped, above] {16} (E);
+  \draw[black, line width=1.2pt] (C) -- node[midway, sloped, above] {24} (F);
+  \draw[green!100, line width=1.2pt] (C) -- node[midway, sloped, above] {20} (G);
+  \draw[black, line width=1.2pt] (D) -- node[midway, sloped, above] {18} (E);
+  \draw[black, line width=1.2pt] (D) -- node[midway, sloped, above] {27} (F);
+  \draw[black, line width=1.2pt] (D) -- node[midway, sloped, above] {14} (G);
+  \draw[green!100, line width=1.2pt] (E) -- node[midway, sloped, above] {12} (F);
+  \draw[black, line width=1.2pt] (E) -- node[midway, sloped, above] {22} (G);
+  \draw[black, line width=1.2pt] (F) -- node[midway, sloped, above] {26} (G);
+\end{tikzpicture}
+\end{center}
+\noindent\rule{\linewidth}{0.3pt}
+\begin{center}
+\begin{flushleft}\textbf{Distance Matrix}\\[1.75mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (0cm,0cm) rectangle (5.6000000000000005cm, -5.6000000000000005cm);
+  \filldraw[fill=white] (0cm,-0.8cm) rectangle (0.8cm,0cm);
+  \node at (0.4cm,-0.4cm) {0};
+  \filldraw[fill=white] (0.8cm,-0.8cm) rectangle (1.6cm,0cm);
+  \node at (1.2000000000000002cm,-0.4cm) {10};
+  \filldraw[fill=white] (1.6cm,-0.8cm) rectangle (2.4000000000000004cm,0cm);
+  \node at (2cm,-0.4cm) {15};
+  \filldraw[fill=white] (2.4000000000000004cm,-0.8cm) rectangle (3.2cm,0cm);
+  \node at (2.8000000000000003cm,-0.4cm) {20};
+  \filldraw[fill=white] (3.2cm,-0.8cm) rectangle (4cm,0cm);
+  \node at (3.6cm,-0.4cm) {25};
+  \filldraw[fill=white] (4cm,-0.8cm) rectangle (4.8cm,0cm);
+  \node at (4.4cm,-0.4cm) {18};
+  \filldraw[fill=white] (4.800000000000001cm,-0.8cm) rectangle (5.6000000000000005cm,0cm);
+  \node at (5.200000000000001cm,-0.4cm) {12};
+  \filldraw[fill=white] (0cm,-1.6cm) rectangle (0.8cm,-0.8cm);
+  \node at (0.4cm,-1.2000000000000002cm) {10};
+  \filldraw[fill=white] (0.8cm,-1.6cm) rectangle (1.6cm,-0.8cm);
+  \node at (1.2000000000000002cm,-1.2000000000000002cm) {0};
+  \filldraw[fill=white] (1.6cm,-1.6cm) rectangle (2.4000000000000004cm,-0.8cm);
+  \node at (2cm,-1.2000000000000002cm) {35};
+  \filldraw[fill=white] (2.4000000000000004cm,-1.6cm) rectangle (3.2cm,-0.8cm);
+  \node at (2.8000000000000003cm,-1.2000000000000002cm) {25};
+  \filldraw[fill=white] (3.2cm,-1.6cm) rectangle (4cm,-0.8cm);
+  \node at (3.6cm,-1.2000000000000002cm) {30};
+  \filldraw[fill=white] (4cm,-1.6cm) rectangle (4.8cm,-0.8cm);
+  \node at (4.4cm,-1.2000000000000002cm) {22};
+  \filldraw[fill=white] (4.800000000000001cm,-1.6cm) rectangle (5.6000000000000005cm,-0.8cm);
+  \node at (5.200000000000001cm,-1.2000000000000002cm) {28};
+  \filldraw[fill=white] (0cm,-2.4000000000000004cm) rectangle (0.8cm,-1.6cm);
+  \node at (0.4cm,-2cm) {15};
+  \filldraw[fill=white] (0.8cm,-2.4000000000000004cm) rectangle (1.6cm,-1.6cm);
+  \node at (1.2000000000000002cm,-2cm) {35};
+  \filldraw[fill=white] (1.6cm,-2.4000000000000004cm) rectangle (2.4000000000000004cm,-1.6cm);
+  \node at (2cm,-2cm) {0};
+  \filldraw[fill=white] (2.4000000000000004cm,-2.4000000000000004cm) rectangle (3.2cm,-1.6cm);
+  \node at (2.8000000000000003cm,-2cm) {30};
+  \filldraw[fill=white] (3.2cm,-2.4000000000000004cm) rectangle (4cm,-1.6cm);
+  \node at (3.6cm,-2cm) {16};
+  \filldraw[fill=white] (4cm,-2.4000000000000004cm) rectangle (4.8cm,-1.6cm);
+  \node at (4.4cm,-2cm) {24};
+  \filldraw[fill=white] (4.800000000000001cm,-2.4000000000000004cm) rectangle (5.6000000000000005cm,-1.6cm);
+  \node at (5.200000000000001cm,-2cm) {20};
+  \filldraw[fill=white] (0cm,-3.2cm) rectangle (0.8cm,-2.4000000000000004cm);
+  \node at (0.4cm,-2.8000000000000003cm) {20};
+  \filldraw[fill=white] (0.8cm,-3.2cm) rectangle (1.6cm,-2.4000000000000004cm);
+  \node at (1.2000000000000002cm,-2.8000000000000003cm) {25};
+  \filldraw[fill=white] (1.6cm,-3.2cm) rectangle (2.4000000000000004cm,-2.4000000000000004cm);
+  \node at (2cm,-2.8000000000000003cm) {30};
+  \filldraw[fill=white] (2.4000000000000004cm,-3.2cm) rectangle (3.2cm,-2.4000000000000004cm);
+  \node at (2.8000000000000003cm,-2.8000000000000003cm) {0};
+  \filldraw[fill=white] (3.2cm,-3.2cm) rectangle (4cm,-2.4000000000000004cm);
+  \node at (3.6cm,-2.8000000000000003cm) {18};
+  \filldraw[fill=white] (4cm,-3.2cm) rectangle (4.8cm,-2.4000000000000004cm);
+  \node at (4.4cm,-2.8000000000000003cm) {27};
+  \filldraw[fill=white] (4.800000000000001cm,-3.2cm) rectangle (5.6000000000000005cm,-2.4000000000000004cm);
+  \node at (5.200000000000001cm,-2.8000000000000003cm) {14};
+  \filldraw[fill=white] (0cm,-4cm) rectangle (0.8cm,-3.2cm);
+  \node at (0.4cm,-3.6cm) {25};
+  \filldraw[fill=white] (0.8cm,-4cm) rectangle (1.6cm,-3.2cm);
+  \node at (1.2000000000000002cm,-3.6cm) {30};
+  \filldraw[fill=white] (1.6cm,-4cm) rectangle (2.4000000000000004cm,-3.2cm);
+  \node at (2cm,-3.6cm) {16};
+  \filldraw[fill=white] (2.4000000000000004cm,-4cm) rectangle (3.2cm,-3.2cm);
+  \node at (2.8000000000000003cm,-3.6cm) {18};
+  \filldraw[fill=white] (3.2cm,-4cm) rectangle (4cm,-3.2cm);
+  \node at (3.6cm,-3.6cm) {0};
+  \filldraw[fill=white] (4cm,-4cm) rectangle (4.8cm,-3.2cm);
+  \node at (4.4cm,-3.6cm) {12};
+  \filldraw[fill=white] (4.800000000000001cm,-4cm) rectangle (5.6000000000000005cm,-3.2cm);
+  \node at (5.200000000000001cm,-3.6cm) {22};
+  \filldraw[fill=white] (0cm,-4.8cm) rectangle (0.8cm,-4cm);
+  \node at (0.4cm,-4.4cm) {18};
+  \filldraw[fill=white] (0.8cm,-4.8cm) rectangle (1.6cm,-4cm);
+  \node at (1.2000000000000002cm,-4.4cm) {22};
+  \filldraw[fill=white] (1.6cm,-4.8cm) rectangle (2.4000000000000004cm,-4cm);
+  \node at (2cm,-4.4cm) {24};
+  \filldraw[fill=white] (2.4000000000000004cm,-4.8cm) rectangle (3.2cm,-4cm);
+  \node at (2.8000000000000003cm,-4.4cm) {27};
+  \filldraw[fill=white] (3.2cm,-4.8cm) rectangle (4cm,-4cm);
+  \node at (3.6cm,-4.4cm) {12};
+  \filldraw[fill=white] (4cm,-4.8cm) rectangle (4.8cm,-4cm);
+  \node at (4.4cm,-4.4cm) {0};
+  \filldraw[fill=white] (4.800000000000001cm,-4.8cm) rectangle (5.6000000000000005cm,-4cm);
+  \node at (5.200000000000001cm,-4.4cm) {26};
+  \filldraw[fill=white] (0cm,-5.6000000000000005cm) rectangle (0.8cm,-4.800000000000001cm);
+  \node at (0.4cm,-5.200000000000001cm) {12};
+  \filldraw[fill=white] (0.8cm,-5.6000000000000005cm) rectangle (1.6cm,-4.800000000000001cm);
+  \node at (1.2000000000000002cm,-5.200000000000001cm) {28};
+  \filldraw[fill=white] (1.6cm,-5.6000000000000005cm) rectangle (2.4000000000000004cm,-4.800000000000001cm);
+  \node at (2cm,-5.200000000000001cm) {20};
+  \filldraw[fill=white] (2.4000000000000004cm,-5.6000000000000005cm) rectangle (3.2cm,-4.800000000000001cm);
+  \node at (2.8000000000000003cm,-5.200000000000001cm) {14};
+  \filldraw[fill=white] (3.2cm,-5.6000000000000005cm) rectangle (4cm,-4.800000000000001cm);
+  \node at (3.6cm,-5.200000000000001cm) {22};
+  \filldraw[fill=white] (4cm,-5.6000000000000005cm) rectangle (4.8cm,-4.800000000000001cm);
+  \node at (4.4cm,-5.200000000000001cm) {26};
+  \filldraw[fill=white] (4.800000000000001cm,-5.6000000000000005cm) rectangle (5.6000000000000005cm,-4.800000000000001cm);
+  \node at (5.200000000000001cm,-5.200000000000001cm) {0};
+\end{tikzpicture}
+\end{center}
+\noindent\rule{\linewidth}{0.3pt}
+\begin{center}
+\begin{flushleft}\textbf{Tour Cost}\\[1.75mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (0cm,0) rectangle (0.5cm,3.5cm);
+  \filldraw[fill=gray!30] (0cm,0) rectangle (0.5cm,1.5909090909090908cm);
+  \node[above] at (0.25cm,1.5909090909090908cm) {10};
+  \filldraw[fill=white!0, draw=none] (0.7cm,0) rectangle (1.2cm,3.5cm);
+  \filldraw[fill=gray!30] (0.7cm,0) rectangle (1.2cm,3.5cm);
+  \node[above] at (0.95cm,3.5cm) {22};
+  \filldraw[fill=white!0, draw=none] (1.4cm,0) rectangle (1.9cm,3.5cm);
+  \filldraw[fill=gray!30] (1.4cm,0) rectangle (1.9cm,1.9090909090909092cm);
+  \node[above] at (1.65cm,1.9090909090909092cm) {12};
+  \filldraw[fill=white!0, draw=none] (2.0999999999999996cm,0) rectangle (2.5999999999999996cm,3.5cm);
+  \filldraw[fill=gray!30] (2.0999999999999996cm,0) rectangle (2.5999999999999996cm,2.5454545454545454cm);
+  \node[above] at (2.3499999999999996cm,2.5454545454545454cm) {16};
+  \filldraw[fill=white!0, draw=none] (2.8cm,0) rectangle (3.3cm,3.5cm);
+  \filldraw[fill=gray!30] (2.8cm,0) rectangle (3.3cm,3.1818181818181817cm);
+  \node[above] at (3.05cm,3.1818181818181817cm) {20};
+\end{tikzpicture}
+\end{center}
+\newpage
+% --- Frame 7 ---
+\begin{center}\LARGE\textbf{TSP}\\[6mm]\end{center}
+\begin{center}
+\begin{flushleft}\textbf{TSP Log}\\[1.75mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (0,0) rectangle (10cm, -0.25cm);
+  \node[anchor=north, align=center, text=black] at (5cm,0) {\texttt{Move to D with distance 14}};
+\end{tikzpicture}
+\end{center}
+\noindent\rule{\linewidth}{0.3pt}
+\begin{center}
+\begin{flushleft}\textbf{TSP Graph}\\[2mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (-4cm,0) rectangle (4cm, -3cm);
+  \node[circle, draw, minimum size=8mm, fill=blue!20] (A) at (0.0:3cm) {A};
+  \node[circle, draw, minimum size=8mm, fill=blue!20] (B) at (51.4:3cm) {B};
+  \node[circle, draw, minimum size=8mm, fill=blue!20] (C) at (102.9:3cm) {C};
+  \node[circle, draw, minimum size=8mm, fill=blue!50] (D) at (154.3:3cm) {D};
+  \node[circle, draw, minimum size=8mm, fill=blue!20] (E) at (205.7:3cm) {E};
+  \node[circle, draw, minimum size=8mm, fill=blue!20] (F) at (257.1:3cm) {F};
+  \node[circle, draw, minimum size=8mm, fill=blue!20] (G) at (308.6:3cm) {G};
+  \draw[green!100, line width=1.2pt] (A) -- node[midway, sloped, above] {10} (B);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {15} (C);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {20} (D);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {25} (E);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {18} (F);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {12} (G);
+  \draw[black, line width=1.2pt] (B) -- node[midway, sloped, above] {35} (C);
+  \draw[black, line width=1.2pt] (B) -- node[midway, sloped, above] {25} (D);
+  \draw[black, line width=1.2pt] (B) -- node[midway, sloped, above] {30} (E);
+  \draw[green!100, line width=1.2pt] (B) -- node[midway, sloped, above] {22} (F);
+  \draw[black, line width=1.2pt] (B) -- node[midway, sloped, above] {28} (G);
+  \draw[black, line width=1.2pt] (C) -- node[midway, sloped, above] {30} (D);
+  \draw[green!100, line width=1.2pt] (C) -- node[midway, sloped, above] {16} (E);
+  \draw[black, line width=1.2pt] (C) -- node[midway, sloped, above] {24} (F);
+  \draw[green!100, line width=1.2pt] (C) -- node[midway, sloped, above] {20} (G);
+  \draw[black, line width=1.2pt] (D) -- node[midway, sloped, above] {18} (E);
+  \draw[black, line width=1.2pt] (D) -- node[midway, sloped, above] {27} (F);
+  \draw[green!100, line width=1.2pt] (D) -- node[midway, sloped, above] {14} (G);
+  \draw[green!100, line width=1.2pt] (E) -- node[midway, sloped, above] {12} (F);
+  \draw[black, line width=1.2pt] (E) -- node[midway, sloped, above] {22} (G);
+  \draw[black, line width=1.2pt] (F) -- node[midway, sloped, above] {26} (G);
+\end{tikzpicture}
+\end{center}
+\noindent\rule{\linewidth}{0.3pt}
+\begin{center}
+\begin{flushleft}\textbf{Distance Matrix}\\[1.75mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (0cm,0cm) rectangle (5.6000000000000005cm, -5.6000000000000005cm);
+  \filldraw[fill=white] (0cm,-0.8cm) rectangle (0.8cm,0cm);
+  \node at (0.4cm,-0.4cm) {0};
+  \filldraw[fill=white] (0.8cm,-0.8cm) rectangle (1.6cm,0cm);
+  \node at (1.2000000000000002cm,-0.4cm) {10};
+  \filldraw[fill=white] (1.6cm,-0.8cm) rectangle (2.4000000000000004cm,0cm);
+  \node at (2cm,-0.4cm) {15};
+  \filldraw[fill=white] (2.4000000000000004cm,-0.8cm) rectangle (3.2cm,0cm);
+  \node at (2.8000000000000003cm,-0.4cm) {20};
+  \filldraw[fill=white] (3.2cm,-0.8cm) rectangle (4cm,0cm);
+  \node at (3.6cm,-0.4cm) {25};
+  \filldraw[fill=white] (4cm,-0.8cm) rectangle (4.8cm,0cm);
+  \node at (4.4cm,-0.4cm) {18};
+  \filldraw[fill=white] (4.800000000000001cm,-0.8cm) rectangle (5.6000000000000005cm,0cm);
+  \node at (5.200000000000001cm,-0.4cm) {12};
+  \filldraw[fill=white] (0cm,-1.6cm) rectangle (0.8cm,-0.8cm);
+  \node at (0.4cm,-1.2000000000000002cm) {10};
+  \filldraw[fill=white] (0.8cm,-1.6cm) rectangle (1.6cm,-0.8cm);
+  \node at (1.2000000000000002cm,-1.2000000000000002cm) {0};
+  \filldraw[fill=white] (1.6cm,-1.6cm) rectangle (2.4000000000000004cm,-0.8cm);
+  \node at (2cm,-1.2000000000000002cm) {35};
+  \filldraw[fill=white] (2.4000000000000004cm,-1.6cm) rectangle (3.2cm,-0.8cm);
+  \node at (2.8000000000000003cm,-1.2000000000000002cm) {25};
+  \filldraw[fill=white] (3.2cm,-1.6cm) rectangle (4cm,-0.8cm);
+  \node at (3.6cm,-1.2000000000000002cm) {30};
+  \filldraw[fill=white] (4cm,-1.6cm) rectangle (4.8cm,-0.8cm);
+  \node at (4.4cm,-1.2000000000000002cm) {22};
+  \filldraw[fill=white] (4.800000000000001cm,-1.6cm) rectangle (5.6000000000000005cm,-0.8cm);
+  \node at (5.200000000000001cm,-1.2000000000000002cm) {28};
+  \filldraw[fill=white] (0cm,-2.4000000000000004cm) rectangle (0.8cm,-1.6cm);
+  \node at (0.4cm,-2cm) {15};
+  \filldraw[fill=white] (0.8cm,-2.4000000000000004cm) rectangle (1.6cm,-1.6cm);
+  \node at (1.2000000000000002cm,-2cm) {35};
+  \filldraw[fill=white] (1.6cm,-2.4000000000000004cm) rectangle (2.4000000000000004cm,-1.6cm);
+  \node at (2cm,-2cm) {0};
+  \filldraw[fill=white] (2.4000000000000004cm,-2.4000000000000004cm) rectangle (3.2cm,-1.6cm);
+  \node at (2.8000000000000003cm,-2cm) {30};
+  \filldraw[fill=white] (3.2cm,-2.4000000000000004cm) rectangle (4cm,-1.6cm);
+  \node at (3.6cm,-2cm) {16};
+  \filldraw[fill=white] (4cm,-2.4000000000000004cm) rectangle (4.8cm,-1.6cm);
+  \node at (4.4cm,-2cm) {24};
+  \filldraw[fill=white] (4.800000000000001cm,-2.4000000000000004cm) rectangle (5.6000000000000005cm,-1.6cm);
+  \node at (5.200000000000001cm,-2cm) {20};
+  \filldraw[fill=white] (0cm,-3.2cm) rectangle (0.8cm,-2.4000000000000004cm);
+  \node at (0.4cm,-2.8000000000000003cm) {20};
+  \filldraw[fill=white] (0.8cm,-3.2cm) rectangle (1.6cm,-2.4000000000000004cm);
+  \node at (1.2000000000000002cm,-2.8000000000000003cm) {25};
+  \filldraw[fill=white] (1.6cm,-3.2cm) rectangle (2.4000000000000004cm,-2.4000000000000004cm);
+  \node at (2cm,-2.8000000000000003cm) {30};
+  \filldraw[fill=white] (2.4000000000000004cm,-3.2cm) rectangle (3.2cm,-2.4000000000000004cm);
+  \node at (2.8000000000000003cm,-2.8000000000000003cm) {0};
+  \filldraw[fill=white] (3.2cm,-3.2cm) rectangle (4cm,-2.4000000000000004cm);
+  \node at (3.6cm,-2.8000000000000003cm) {18};
+  \filldraw[fill=white] (4cm,-3.2cm) rectangle (4.8cm,-2.4000000000000004cm);
+  \node at (4.4cm,-2.8000000000000003cm) {27};
+  \filldraw[fill=white] (4.800000000000001cm,-3.2cm) rectangle (5.6000000000000005cm,-2.4000000000000004cm);
+  \node at (5.200000000000001cm,-2.8000000000000003cm) {14};
+  \filldraw[fill=white] (0cm,-4cm) rectangle (0.8cm,-3.2cm);
+  \node at (0.4cm,-3.6cm) {25};
+  \filldraw[fill=white] (0.8cm,-4cm) rectangle (1.6cm,-3.2cm);
+  \node at (1.2000000000000002cm,-3.6cm) {30};
+  \filldraw[fill=white] (1.6cm,-4cm) rectangle (2.4000000000000004cm,-3.2cm);
+  \node at (2cm,-3.6cm) {16};
+  \filldraw[fill=white] (2.4000000000000004cm,-4cm) rectangle (3.2cm,-3.2cm);
+  \node at (2.8000000000000003cm,-3.6cm) {18};
+  \filldraw[fill=white] (3.2cm,-4cm) rectangle (4cm,-3.2cm);
+  \node at (3.6cm,-3.6cm) {0};
+  \filldraw[fill=white] (4cm,-4cm) rectangle (4.8cm,-3.2cm);
+  \node at (4.4cm,-3.6cm) {12};
+  \filldraw[fill=white] (4.800000000000001cm,-4cm) rectangle (5.6000000000000005cm,-3.2cm);
+  \node at (5.200000000000001cm,-3.6cm) {22};
+  \filldraw[fill=white] (0cm,-4.8cm) rectangle (0.8cm,-4cm);
+  \node at (0.4cm,-4.4cm) {18};
+  \filldraw[fill=white] (0.8cm,-4.8cm) rectangle (1.6cm,-4cm);
+  \node at (1.2000000000000002cm,-4.4cm) {22};
+  \filldraw[fill=white] (1.6cm,-4.8cm) rectangle (2.4000000000000004cm,-4cm);
+  \node at (2cm,-4.4cm) {24};
+  \filldraw[fill=white] (2.4000000000000004cm,-4.8cm) rectangle (3.2cm,-4cm);
+  \node at (2.8000000000000003cm,-4.4cm) {27};
+  \filldraw[fill=white] (3.2cm,-4.8cm) rectangle (4cm,-4cm);
+  \node at (3.6cm,-4.4cm) {12};
+  \filldraw[fill=white] (4cm,-4.8cm) rectangle (4.8cm,-4cm);
+  \node at (4.4cm,-4.4cm) {0};
+  \filldraw[fill=white] (4.800000000000001cm,-4.8cm) rectangle (5.6000000000000005cm,-4cm);
+  \node at (5.200000000000001cm,-4.4cm) {26};
+  \filldraw[fill=white] (0cm,-5.6000000000000005cm) rectangle (0.8cm,-4.800000000000001cm);
+  \node at (0.4cm,-5.200000000000001cm) {12};
+  \filldraw[fill=white] (0.8cm,-5.6000000000000005cm) rectangle (1.6cm,-4.800000000000001cm);
+  \node at (1.2000000000000002cm,-5.200000000000001cm) {28};
+  \filldraw[fill=white] (1.6cm,-5.6000000000000005cm) rectangle (2.4000000000000004cm,-4.800000000000001cm);
+  \node at (2cm,-5.200000000000001cm) {20};
+  \filldraw[fill=white] (2.4000000000000004cm,-5.6000000000000005cm) rectangle (3.2cm,-4.800000000000001cm);
+  \node at (2.8000000000000003cm,-5.200000000000001cm) {14};
+  \filldraw[fill=white] (3.2cm,-5.6000000000000005cm) rectangle (4cm,-4.800000000000001cm);
+  \node at (3.6cm,-5.200000000000001cm) {22};
+  \filldraw[fill=white] (4cm,-5.6000000000000005cm) rectangle (4.8cm,-4.800000000000001cm);
+  \node at (4.4cm,-5.200000000000001cm) {26};
+  \filldraw[fill=white] (4.800000000000001cm,-5.6000000000000005cm) rectangle (5.6000000000000005cm,-4.800000000000001cm);
+  \node at (5.200000000000001cm,-5.200000000000001cm) {0};
+\end{tikzpicture}
+\end{center}
+\noindent\rule{\linewidth}{0.3pt}
+\begin{center}
+\begin{flushleft}\textbf{Tour Cost}\\[1.75mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (0cm,0) rectangle (0.5cm,3.5cm);
+  \filldraw[fill=gray!30] (0cm,0) rectangle (0.5cm,1.5909090909090908cm);
+  \node[above] at (0.25cm,1.5909090909090908cm) {10};
+  \filldraw[fill=white!0, draw=none] (0.7cm,0) rectangle (1.2cm,3.5cm);
+  \filldraw[fill=gray!30] (0.7cm,0) rectangle (1.2cm,3.5cm);
+  \node[above] at (0.95cm,3.5cm) {22};
+  \filldraw[fill=white!0, draw=none] (1.4cm,0) rectangle (1.9cm,3.5cm);
+  \filldraw[fill=gray!30] (1.4cm,0) rectangle (1.9cm,1.9090909090909092cm);
+  \node[above] at (1.65cm,1.9090909090909092cm) {12};
+  \filldraw[fill=white!0, draw=none] (2.0999999999999996cm,0) rectangle (2.5999999999999996cm,3.5cm);
+  \filldraw[fill=gray!30] (2.0999999999999996cm,0) rectangle (2.5999999999999996cm,2.5454545454545454cm);
+  \node[above] at (2.3499999999999996cm,2.5454545454545454cm) {16};
+  \filldraw[fill=white!0, draw=none] (2.8cm,0) rectangle (3.3cm,3.5cm);
+  \filldraw[fill=gray!30] (2.8cm,0) rectangle (3.3cm,3.1818181818181817cm);
+  \node[above] at (3.05cm,3.1818181818181817cm) {20};
+  \filldraw[fill=white!0, draw=none] (3.5cm,0) rectangle (4cm,3.5cm);
+  \filldraw[fill=gray!30] (3.5cm,0) rectangle (4cm,2.227272727272727cm);
+  \node[above] at (3.75cm,2.227272727272727cm) {14};
+\end{tikzpicture}
+\end{center}
+\newpage
+% --- Frame 8 ---
+\begin{center}\LARGE\textbf{TSP}\\[6mm]\end{center}
+\begin{center}
+\begin{flushleft}\textbf{TSP Log}\\[1.75mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (0,0) rectangle (10cm, -0.25cm);
+  \node[anchor=north, align=center, text=black] at (5cm,0) {\texttt{Return to start A with distance 20}};
+\end{tikzpicture}
+\end{center}
+\noindent\rule{\linewidth}{0.3pt}
+\begin{center}
+\begin{flushleft}\textbf{TSP Graph}\\[2mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (-4cm,0) rectangle (4cm, -3cm);
+  \node[circle, draw, minimum size=8mm, fill=blue!20] (A) at (0.0:3cm) {A};
+  \node[circle, draw, minimum size=8mm, fill=blue!20] (B) at (51.4:3cm) {B};
+  \node[circle, draw, minimum size=8mm, fill=blue!20] (C) at (102.9:3cm) {C};
+  \node[circle, draw, minimum size=8mm, fill=blue!20] (D) at (154.3:3cm) {D};
+  \node[circle, draw, minimum size=8mm, fill=blue!20] (E) at (205.7:3cm) {E};
+  \node[circle, draw, minimum size=8mm, fill=blue!20] (F) at (257.1:3cm) {F};
+  \node[circle, draw, minimum size=8mm, fill=blue!20] (G) at (308.6:3cm) {G};
+  \draw[green!100, line width=1.2pt] (A) -- node[midway, sloped, above] {10} (B);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {15} (C);
+  \draw[green!100, line width=1.2pt] (A) -- node[midway, sloped, above] {20} (D);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {25} (E);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {18} (F);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {12} (G);
+  \draw[black, line width=1.2pt] (B) -- node[midway, sloped, above] {35} (C);
+  \draw[black, line width=1.2pt] (B) -- node[midway, sloped, above] {25} (D);
+  \draw[black, line width=1.2pt] (B) -- node[midway, sloped, above] {30} (E);
+  \draw[green!100, line width=1.2pt] (B) -- node[midway, sloped, above] {22} (F);
+  \draw[black, line width=1.2pt] (B) -- node[midway, sloped, above] {28} (G);
+  \draw[black, line width=1.2pt] (C) -- node[midway, sloped, above] {30} (D);
+  \draw[green!100, line width=1.2pt] (C) -- node[midway, sloped, above] {16} (E);
+  \draw[black, line width=1.2pt] (C) -- node[midway, sloped, above] {24} (F);
+  \draw[green!100, line width=1.2pt] (C) -- node[midway, sloped, above] {20} (G);
+  \draw[black, line width=1.2pt] (D) -- node[midway, sloped, above] {18} (E);
+  \draw[black, line width=1.2pt] (D) -- node[midway, sloped, above] {27} (F);
+  \draw[green!100, line width=1.2pt] (D) -- node[midway, sloped, above] {14} (G);
+  \draw[green!100, line width=1.2pt] (E) -- node[midway, sloped, above] {12} (F);
+  \draw[black, line width=1.2pt] (E) -- node[midway, sloped, above] {22} (G);
+  \draw[black, line width=1.2pt] (F) -- node[midway, sloped, above] {26} (G);
+\end{tikzpicture}
+\end{center}
+\noindent\rule{\linewidth}{0.3pt}
+\begin{center}
+\begin{flushleft}\textbf{Distance Matrix}\\[1.75mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (0cm,0cm) rectangle (5.6000000000000005cm, -5.6000000000000005cm);
+  \filldraw[fill=white] (0cm,-0.8cm) rectangle (0.8cm,0cm);
+  \node at (0.4cm,-0.4cm) {0};
+  \filldraw[fill=white] (0.8cm,-0.8cm) rectangle (1.6cm,0cm);
+  \node at (1.2000000000000002cm,-0.4cm) {10};
+  \filldraw[fill=white] (1.6cm,-0.8cm) rectangle (2.4000000000000004cm,0cm);
+  \node at (2cm,-0.4cm) {15};
+  \filldraw[fill=white] (2.4000000000000004cm,-0.8cm) rectangle (3.2cm,0cm);
+  \node at (2.8000000000000003cm,-0.4cm) {20};
+  \filldraw[fill=white] (3.2cm,-0.8cm) rectangle (4cm,0cm);
+  \node at (3.6cm,-0.4cm) {25};
+  \filldraw[fill=white] (4cm,-0.8cm) rectangle (4.8cm,0cm);
+  \node at (4.4cm,-0.4cm) {18};
+  \filldraw[fill=white] (4.800000000000001cm,-0.8cm) rectangle (5.6000000000000005cm,0cm);
+  \node at (5.200000000000001cm,-0.4cm) {12};
+  \filldraw[fill=white] (0cm,-1.6cm) rectangle (0.8cm,-0.8cm);
+  \node at (0.4cm,-1.2000000000000002cm) {10};
+  \filldraw[fill=white] (0.8cm,-1.6cm) rectangle (1.6cm,-0.8cm);
+  \node at (1.2000000000000002cm,-1.2000000000000002cm) {0};
+  \filldraw[fill=white] (1.6cm,-1.6cm) rectangle (2.4000000000000004cm,-0.8cm);
+  \node at (2cm,-1.2000000000000002cm) {35};
+  \filldraw[fill=white] (2.4000000000000004cm,-1.6cm) rectangle (3.2cm,-0.8cm);
+  \node at (2.8000000000000003cm,-1.2000000000000002cm) {25};
+  \filldraw[fill=white] (3.2cm,-1.6cm) rectangle (4cm,-0.8cm);
+  \node at (3.6cm,-1.2000000000000002cm) {30};
+  \filldraw[fill=white] (4cm,-1.6cm) rectangle (4.8cm,-0.8cm);
+  \node at (4.4cm,-1.2000000000000002cm) {22};
+  \filldraw[fill=white] (4.800000000000001cm,-1.6cm) rectangle (5.6000000000000005cm,-0.8cm);
+  \node at (5.200000000000001cm,-1.2000000000000002cm) {28};
+  \filldraw[fill=white] (0cm,-2.4000000000000004cm) rectangle (0.8cm,-1.6cm);
+  \node at (0.4cm,-2cm) {15};
+  \filldraw[fill=white] (0.8cm,-2.4000000000000004cm) rectangle (1.6cm,-1.6cm);
+  \node at (1.2000000000000002cm,-2cm) {35};
+  \filldraw[fill=white] (1.6cm,-2.4000000000000004cm) rectangle (2.4000000000000004cm,-1.6cm);
+  \node at (2cm,-2cm) {0};
+  \filldraw[fill=white] (2.4000000000000004cm,-2.4000000000000004cm) rectangle (3.2cm,-1.6cm);
+  \node at (2.8000000000000003cm,-2cm) {30};
+  \filldraw[fill=white] (3.2cm,-2.4000000000000004cm) rectangle (4cm,-1.6cm);
+  \node at (3.6cm,-2cm) {16};
+  \filldraw[fill=white] (4cm,-2.4000000000000004cm) rectangle (4.8cm,-1.6cm);
+  \node at (4.4cm,-2cm) {24};
+  \filldraw[fill=white] (4.800000000000001cm,-2.4000000000000004cm) rectangle (5.6000000000000005cm,-1.6cm);
+  \node at (5.200000000000001cm,-2cm) {20};
+  \filldraw[fill=white] (0cm,-3.2cm) rectangle (0.8cm,-2.4000000000000004cm);
+  \node at (0.4cm,-2.8000000000000003cm) {20};
+  \filldraw[fill=white] (0.8cm,-3.2cm) rectangle (1.6cm,-2.4000000000000004cm);
+  \node at (1.2000000000000002cm,-2.8000000000000003cm) {25};
+  \filldraw[fill=white] (1.6cm,-3.2cm) rectangle (2.4000000000000004cm,-2.4000000000000004cm);
+  \node at (2cm,-2.8000000000000003cm) {30};
+  \filldraw[fill=white] (2.4000000000000004cm,-3.2cm) rectangle (3.2cm,-2.4000000000000004cm);
+  \node at (2.8000000000000003cm,-2.8000000000000003cm) {0};
+  \filldraw[fill=white] (3.2cm,-3.2cm) rectangle (4cm,-2.4000000000000004cm);
+  \node at (3.6cm,-2.8000000000000003cm) {18};
+  \filldraw[fill=white] (4cm,-3.2cm) rectangle (4.8cm,-2.4000000000000004cm);
+  \node at (4.4cm,-2.8000000000000003cm) {27};
+  \filldraw[fill=white] (4.800000000000001cm,-3.2cm) rectangle (5.6000000000000005cm,-2.4000000000000004cm);
+  \node at (5.200000000000001cm,-2.8000000000000003cm) {14};
+  \filldraw[fill=white] (0cm,-4cm) rectangle (0.8cm,-3.2cm);
+  \node at (0.4cm,-3.6cm) {25};
+  \filldraw[fill=white] (0.8cm,-4cm) rectangle (1.6cm,-3.2cm);
+  \node at (1.2000000000000002cm,-3.6cm) {30};
+  \filldraw[fill=white] (1.6cm,-4cm) rectangle (2.4000000000000004cm,-3.2cm);
+  \node at (2cm,-3.6cm) {16};
+  \filldraw[fill=white] (2.4000000000000004cm,-4cm) rectangle (3.2cm,-3.2cm);
+  \node at (2.8000000000000003cm,-3.6cm) {18};
+  \filldraw[fill=white] (3.2cm,-4cm) rectangle (4cm,-3.2cm);
+  \node at (3.6cm,-3.6cm) {0};
+  \filldraw[fill=white] (4cm,-4cm) rectangle (4.8cm,-3.2cm);
+  \node at (4.4cm,-3.6cm) {12};
+  \filldraw[fill=white] (4.800000000000001cm,-4cm) rectangle (5.6000000000000005cm,-3.2cm);
+  \node at (5.200000000000001cm,-3.6cm) {22};
+  \filldraw[fill=white] (0cm,-4.8cm) rectangle (0.8cm,-4cm);
+  \node at (0.4cm,-4.4cm) {18};
+  \filldraw[fill=white] (0.8cm,-4.8cm) rectangle (1.6cm,-4cm);
+  \node at (1.2000000000000002cm,-4.4cm) {22};
+  \filldraw[fill=white] (1.6cm,-4.8cm) rectangle (2.4000000000000004cm,-4cm);
+  \node at (2cm,-4.4cm) {24};
+  \filldraw[fill=white] (2.4000000000000004cm,-4.8cm) rectangle (3.2cm,-4cm);
+  \node at (2.8000000000000003cm,-4.4cm) {27};
+  \filldraw[fill=white] (3.2cm,-4.8cm) rectangle (4cm,-4cm);
+  \node at (3.6cm,-4.4cm) {12};
+  \filldraw[fill=white] (4cm,-4.8cm) rectangle (4.8cm,-4cm);
+  \node at (4.4cm,-4.4cm) {0};
+  \filldraw[fill=white] (4.800000000000001cm,-4.8cm) rectangle (5.6000000000000005cm,-4cm);
+  \node at (5.200000000000001cm,-4.4cm) {26};
+  \filldraw[fill=white] (0cm,-5.6000000000000005cm) rectangle (0.8cm,-4.800000000000001cm);
+  \node at (0.4cm,-5.200000000000001cm) {12};
+  \filldraw[fill=white] (0.8cm,-5.6000000000000005cm) rectangle (1.6cm,-4.800000000000001cm);
+  \node at (1.2000000000000002cm,-5.200000000000001cm) {28};
+  \filldraw[fill=white] (1.6cm,-5.6000000000000005cm) rectangle (2.4000000000000004cm,-4.800000000000001cm);
+  \node at (2cm,-5.200000000000001cm) {20};
+  \filldraw[fill=white] (2.4000000000000004cm,-5.6000000000000005cm) rectangle (3.2cm,-4.800000000000001cm);
+  \node at (2.8000000000000003cm,-5.200000000000001cm) {14};
+  \filldraw[fill=white] (3.2cm,-5.6000000000000005cm) rectangle (4cm,-4.800000000000001cm);
+  \node at (3.6cm,-5.200000000000001cm) {22};
+  \filldraw[fill=white] (4cm,-5.6000000000000005cm) rectangle (4.8cm,-4.800000000000001cm);
+  \node at (4.4cm,-5.200000000000001cm) {26};
+  \filldraw[fill=white] (4.800000000000001cm,-5.6000000000000005cm) rectangle (5.6000000000000005cm,-4.800000000000001cm);
+  \node at (5.200000000000001cm,-5.200000000000001cm) {0};
+\end{tikzpicture}
+\end{center}
+\noindent\rule{\linewidth}{0.3pt}
+\begin{center}
+\begin{flushleft}\textbf{Tour Cost}\\[1.75mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (0cm,0) rectangle (0.5cm,3.5cm);
+  \filldraw[fill=gray!30] (0cm,0) rectangle (0.5cm,1.5909090909090908cm);
+  \node[above] at (0.25cm,1.5909090909090908cm) {10};
+  \filldraw[fill=white!0, draw=none] (0.7cm,0) rectangle (1.2cm,3.5cm);
+  \filldraw[fill=gray!30] (0.7cm,0) rectangle (1.2cm,3.5cm);
+  \node[above] at (0.95cm,3.5cm) {22};
+  \filldraw[fill=white!0, draw=none] (1.4cm,0) rectangle (1.9cm,3.5cm);
+  \filldraw[fill=gray!30] (1.4cm,0) rectangle (1.9cm,1.9090909090909092cm);
+  \node[above] at (1.65cm,1.9090909090909092cm) {12};
+  \filldraw[fill=white!0, draw=none] (2.0999999999999996cm,0) rectangle (2.5999999999999996cm,3.5cm);
+  \filldraw[fill=gray!30] (2.0999999999999996cm,0) rectangle (2.5999999999999996cm,2.5454545454545454cm);
+  \node[above] at (2.3499999999999996cm,2.5454545454545454cm) {16};
+  \filldraw[fill=white!0, draw=none] (2.8cm,0) rectangle (3.3cm,3.5cm);
+  \filldraw[fill=gray!30] (2.8cm,0) rectangle (3.3cm,3.1818181818181817cm);
+  \node[above] at (3.05cm,3.1818181818181817cm) {20};
+  \filldraw[fill=white!0, draw=none] (3.5cm,0) rectangle (4cm,3.5cm);
+  \filldraw[fill=gray!30] (3.5cm,0) rectangle (4cm,2.227272727272727cm);
+  \node[above] at (3.75cm,2.227272727272727cm) {14};
+  \filldraw[fill=white!0, draw=none] (4.199999999999999cm,0) rectangle (4.699999999999999cm,3.5cm);
+  \filldraw[fill=gray!30] (4.199999999999999cm,0) rectangle (4.699999999999999cm,3.1818181818181817cm);
+  \node[above] at (4.449999999999999cm,3.1818181818181817cm) {20};
+\end{tikzpicture}
+\end{center}
+\newpage
+% --- Frame 9 ---
+\begin{center}\LARGE\textbf{TSP}\\[6mm]\end{center}
+\begin{center}
+\begin{flushleft}\textbf{TSP Log}\\[1.75mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (0,0) rectangle (10cm, -0.25cm);
+  \node[anchor=north, align=center, text=black] at (5cm,0) {\texttt{Tour completed: A -> B -> F -> E -> C -> G -> D -> A}};
+\end{tikzpicture}
+\end{center}
+\noindent\rule{\linewidth}{0.3pt}
+\begin{center}
+\begin{flushleft}\textbf{TSP Graph}\\[2mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (-4cm,0) rectangle (4cm, -3cm);
+  \node[circle, draw, minimum size=8mm, fill=blue!20] (A) at (0.0:3cm) {A};
+  \node[circle, draw, minimum size=8mm, fill=blue!20] (B) at (51.4:3cm) {B};
+  \node[circle, draw, minimum size=8mm, fill=blue!20] (C) at (102.9:3cm) {C};
+  \node[circle, draw, minimum size=8mm, fill=blue!20] (D) at (154.3:3cm) {D};
+  \node[circle, draw, minimum size=8mm, fill=blue!20] (E) at (205.7:3cm) {E};
+  \node[circle, draw, minimum size=8mm, fill=blue!20] (F) at (257.1:3cm) {F};
+  \node[circle, draw, minimum size=8mm, fill=blue!20] (G) at (308.6:3cm) {G};
+  \draw[green!100, line width=1.2pt] (A) -- node[midway, sloped, above] {10} (B);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {15} (C);
+  \draw[green!100, line width=1.2pt] (A) -- node[midway, sloped, above] {20} (D);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {25} (E);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {18} (F);
+  \draw[black, line width=1.2pt] (A) -- node[midway, sloped, above] {12} (G);
+  \draw[black, line width=1.2pt] (B) -- node[midway, sloped, above] {35} (C);
+  \draw[black, line width=1.2pt] (B) -- node[midway, sloped, above] {25} (D);
+  \draw[black, line width=1.2pt] (B) -- node[midway, sloped, above] {30} (E);
+  \draw[green!100, line width=1.2pt] (B) -- node[midway, sloped, above] {22} (F);
+  \draw[black, line width=1.2pt] (B) -- node[midway, sloped, above] {28} (G);
+  \draw[black, line width=1.2pt] (C) -- node[midway, sloped, above] {30} (D);
+  \draw[green!100, line width=1.2pt] (C) -- node[midway, sloped, above] {16} (E);
+  \draw[black, line width=1.2pt] (C) -- node[midway, sloped, above] {24} (F);
+  \draw[green!100, line width=1.2pt] (C) -- node[midway, sloped, above] {20} (G);
+  \draw[black, line width=1.2pt] (D) -- node[midway, sloped, above] {18} (E);
+  \draw[black, line width=1.2pt] (D) -- node[midway, sloped, above] {27} (F);
+  \draw[green!100, line width=1.2pt] (D) -- node[midway, sloped, above] {14} (G);
+  \draw[green!100, line width=1.2pt] (E) -- node[midway, sloped, above] {12} (F);
+  \draw[black, line width=1.2pt] (E) -- node[midway, sloped, above] {22} (G);
+  \draw[black, line width=1.2pt] (F) -- node[midway, sloped, above] {26} (G);
+\end{tikzpicture}
+\end{center}
+\noindent\rule{\linewidth}{0.3pt}
+\begin{center}
+\begin{flushleft}\textbf{Distance Matrix}\\[1.75mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (0cm,0cm) rectangle (5.6000000000000005cm, -5.6000000000000005cm);
+  \filldraw[fill=white] (0cm,-0.8cm) rectangle (0.8cm,0cm);
+  \node at (0.4cm,-0.4cm) {0};
+  \filldraw[fill=white] (0.8cm,-0.8cm) rectangle (1.6cm,0cm);
+  \node at (1.2000000000000002cm,-0.4cm) {10};
+  \filldraw[fill=white] (1.6cm,-0.8cm) rectangle (2.4000000000000004cm,0cm);
+  \node at (2cm,-0.4cm) {15};
+  \filldraw[fill=white] (2.4000000000000004cm,-0.8cm) rectangle (3.2cm,0cm);
+  \node at (2.8000000000000003cm,-0.4cm) {20};
+  \filldraw[fill=white] (3.2cm,-0.8cm) rectangle (4cm,0cm);
+  \node at (3.6cm,-0.4cm) {25};
+  \filldraw[fill=white] (4cm,-0.8cm) rectangle (4.8cm,0cm);
+  \node at (4.4cm,-0.4cm) {18};
+  \filldraw[fill=white] (4.800000000000001cm,-0.8cm) rectangle (5.6000000000000005cm,0cm);
+  \node at (5.200000000000001cm,-0.4cm) {12};
+  \filldraw[fill=white] (0cm,-1.6cm) rectangle (0.8cm,-0.8cm);
+  \node at (0.4cm,-1.2000000000000002cm) {10};
+  \filldraw[fill=white] (0.8cm,-1.6cm) rectangle (1.6cm,-0.8cm);
+  \node at (1.2000000000000002cm,-1.2000000000000002cm) {0};
+  \filldraw[fill=white] (1.6cm,-1.6cm) rectangle (2.4000000000000004cm,-0.8cm);
+  \node at (2cm,-1.2000000000000002cm) {35};
+  \filldraw[fill=white] (2.4000000000000004cm,-1.6cm) rectangle (3.2cm,-0.8cm);
+  \node at (2.8000000000000003cm,-1.2000000000000002cm) {25};
+  \filldraw[fill=white] (3.2cm,-1.6cm) rectangle (4cm,-0.8cm);
+  \node at (3.6cm,-1.2000000000000002cm) {30};
+  \filldraw[fill=white] (4cm,-1.6cm) rectangle (4.8cm,-0.8cm);
+  \node at (4.4cm,-1.2000000000000002cm) {22};
+  \filldraw[fill=white] (4.800000000000001cm,-1.6cm) rectangle (5.6000000000000005cm,-0.8cm);
+  \node at (5.200000000000001cm,-1.2000000000000002cm) {28};
+  \filldraw[fill=white] (0cm,-2.4000000000000004cm) rectangle (0.8cm,-1.6cm);
+  \node at (0.4cm,-2cm) {15};
+  \filldraw[fill=white] (0.8cm,-2.4000000000000004cm) rectangle (1.6cm,-1.6cm);
+  \node at (1.2000000000000002cm,-2cm) {35};
+  \filldraw[fill=white] (1.6cm,-2.4000000000000004cm) rectangle (2.4000000000000004cm,-1.6cm);
+  \node at (2cm,-2cm) {0};
+  \filldraw[fill=white] (2.4000000000000004cm,-2.4000000000000004cm) rectangle (3.2cm,-1.6cm);
+  \node at (2.8000000000000003cm,-2cm) {30};
+  \filldraw[fill=white] (3.2cm,-2.4000000000000004cm) rectangle (4cm,-1.6cm);
+  \node at (3.6cm,-2cm) {16};
+  \filldraw[fill=white] (4cm,-2.4000000000000004cm) rectangle (4.8cm,-1.6cm);
+  \node at (4.4cm,-2cm) {24};
+  \filldraw[fill=white] (4.800000000000001cm,-2.4000000000000004cm) rectangle (5.6000000000000005cm,-1.6cm);
+  \node at (5.200000000000001cm,-2cm) {20};
+  \filldraw[fill=white] (0cm,-3.2cm) rectangle (0.8cm,-2.4000000000000004cm);
+  \node at (0.4cm,-2.8000000000000003cm) {20};
+  \filldraw[fill=white] (0.8cm,-3.2cm) rectangle (1.6cm,-2.4000000000000004cm);
+  \node at (1.2000000000000002cm,-2.8000000000000003cm) {25};
+  \filldraw[fill=white] (1.6cm,-3.2cm) rectangle (2.4000000000000004cm,-2.4000000000000004cm);
+  \node at (2cm,-2.8000000000000003cm) {30};
+  \filldraw[fill=white] (2.4000000000000004cm,-3.2cm) rectangle (3.2cm,-2.4000000000000004cm);
+  \node at (2.8000000000000003cm,-2.8000000000000003cm) {0};
+  \filldraw[fill=white] (3.2cm,-3.2cm) rectangle (4cm,-2.4000000000000004cm);
+  \node at (3.6cm,-2.8000000000000003cm) {18};
+  \filldraw[fill=white] (4cm,-3.2cm) rectangle (4.8cm,-2.4000000000000004cm);
+  \node at (4.4cm,-2.8000000000000003cm) {27};
+  \filldraw[fill=white] (4.800000000000001cm,-3.2cm) rectangle (5.6000000000000005cm,-2.4000000000000004cm);
+  \node at (5.200000000000001cm,-2.8000000000000003cm) {14};
+  \filldraw[fill=white] (0cm,-4cm) rectangle (0.8cm,-3.2cm);
+  \node at (0.4cm,-3.6cm) {25};
+  \filldraw[fill=white] (0.8cm,-4cm) rectangle (1.6cm,-3.2cm);
+  \node at (1.2000000000000002cm,-3.6cm) {30};
+  \filldraw[fill=white] (1.6cm,-4cm) rectangle (2.4000000000000004cm,-3.2cm);
+  \node at (2cm,-3.6cm) {16};
+  \filldraw[fill=white] (2.4000000000000004cm,-4cm) rectangle (3.2cm,-3.2cm);
+  \node at (2.8000000000000003cm,-3.6cm) {18};
+  \filldraw[fill=white] (3.2cm,-4cm) rectangle (4cm,-3.2cm);
+  \node at (3.6cm,-3.6cm) {0};
+  \filldraw[fill=white] (4cm,-4cm) rectangle (4.8cm,-3.2cm);
+  \node at (4.4cm,-3.6cm) {12};
+  \filldraw[fill=white] (4.800000000000001cm,-4cm) rectangle (5.6000000000000005cm,-3.2cm);
+  \node at (5.200000000000001cm,-3.6cm) {22};
+  \filldraw[fill=white] (0cm,-4.8cm) rectangle (0.8cm,-4cm);
+  \node at (0.4cm,-4.4cm) {18};
+  \filldraw[fill=white] (0.8cm,-4.8cm) rectangle (1.6cm,-4cm);
+  \node at (1.2000000000000002cm,-4.4cm) {22};
+  \filldraw[fill=white] (1.6cm,-4.8cm) rectangle (2.4000000000000004cm,-4cm);
+  \node at (2cm,-4.4cm) {24};
+  \filldraw[fill=white] (2.4000000000000004cm,-4.8cm) rectangle (3.2cm,-4cm);
+  \node at (2.8000000000000003cm,-4.4cm) {27};
+  \filldraw[fill=white] (3.2cm,-4.8cm) rectangle (4cm,-4cm);
+  \node at (3.6cm,-4.4cm) {12};
+  \filldraw[fill=white] (4cm,-4.8cm) rectangle (4.8cm,-4cm);
+  \node at (4.4cm,-4.4cm) {0};
+  \filldraw[fill=white] (4.800000000000001cm,-4.8cm) rectangle (5.6000000000000005cm,-4cm);
+  \node at (5.200000000000001cm,-4.4cm) {26};
+  \filldraw[fill=white] (0cm,-5.6000000000000005cm) rectangle (0.8cm,-4.800000000000001cm);
+  \node at (0.4cm,-5.200000000000001cm) {12};
+  \filldraw[fill=white] (0.8cm,-5.6000000000000005cm) rectangle (1.6cm,-4.800000000000001cm);
+  \node at (1.2000000000000002cm,-5.200000000000001cm) {28};
+  \filldraw[fill=white] (1.6cm,-5.6000000000000005cm) rectangle (2.4000000000000004cm,-4.800000000000001cm);
+  \node at (2cm,-5.200000000000001cm) {20};
+  \filldraw[fill=white] (2.4000000000000004cm,-5.6000000000000005cm) rectangle (3.2cm,-4.800000000000001cm);
+  \node at (2.8000000000000003cm,-5.200000000000001cm) {14};
+  \filldraw[fill=white] (3.2cm,-5.6000000000000005cm) rectangle (4cm,-4.800000000000001cm);
+  \node at (3.6cm,-5.200000000000001cm) {22};
+  \filldraw[fill=white] (4cm,-5.6000000000000005cm) rectangle (4.8cm,-4.800000000000001cm);
+  \node at (4.4cm,-5.200000000000001cm) {26};
+  \filldraw[fill=white] (4.800000000000001cm,-5.6000000000000005cm) rectangle (5.6000000000000005cm,-4.800000000000001cm);
+  \node at (5.200000000000001cm,-5.200000000000001cm) {0};
+\end{tikzpicture}
+\end{center}
+\noindent\rule{\linewidth}{0.3pt}
+\begin{center}
+\begin{flushleft}\textbf{Tour Cost}\\[1.75mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (0cm,0) rectangle (0.5cm,3.5cm);
+  \filldraw[fill=gray!30] (0cm,0) rectangle (0.5cm,1.5909090909090908cm);
+  \node[above] at (0.25cm,1.5909090909090908cm) {10};
+  \filldraw[fill=white!0, draw=none] (0.7cm,0) rectangle (1.2cm,3.5cm);
+  \filldraw[fill=gray!30] (0.7cm,0) rectangle (1.2cm,3.5cm);
+  \node[above] at (0.95cm,3.5cm) {22};
+  \filldraw[fill=white!0, draw=none] (1.4cm,0) rectangle (1.9cm,3.5cm);
+  \filldraw[fill=gray!30] (1.4cm,0) rectangle (1.9cm,1.9090909090909092cm);
+  \node[above] at (1.65cm,1.9090909090909092cm) {12};
+  \filldraw[fill=white!0, draw=none] (2.0999999999999996cm,0) rectangle (2.5999999999999996cm,3.5cm);
+  \filldraw[fill=gray!30] (2.0999999999999996cm,0) rectangle (2.5999999999999996cm,2.5454545454545454cm);
+  \node[above] at (2.3499999999999996cm,2.5454545454545454cm) {16};
+  \filldraw[fill=white!0, draw=none] (2.8cm,0) rectangle (3.3cm,3.5cm);
+  \filldraw[fill=gray!30] (2.8cm,0) rectangle (3.3cm,3.1818181818181817cm);
+  \node[above] at (3.05cm,3.1818181818181817cm) {20};
+  \filldraw[fill=white!0, draw=none] (3.5cm,0) rectangle (4cm,3.5cm);
+  \filldraw[fill=gray!30] (3.5cm,0) rectangle (4cm,2.227272727272727cm);
+  \node[above] at (3.75cm,2.227272727272727cm) {14};
+  \filldraw[fill=white!0, draw=none] (4.199999999999999cm,0) rectangle (4.699999999999999cm,3.5cm);
+  \filldraw[fill=gray!30] (4.199999999999999cm,0) rectangle (4.699999999999999cm,3.1818181818181817cm);
+  \node[above] at (4.449999999999999cm,3.1818181818181817cm) {20};
+\end{tikzpicture}
+\end{center}
+\end{document}

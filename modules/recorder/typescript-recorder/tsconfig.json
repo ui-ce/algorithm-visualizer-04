@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",                   // modern JS
+    "module": "CommonJS",                 // works with Node.js
+    "moduleResolution": "node",
+    "outDir": "./dist",
+    "rootDir": "./src",
+
+    // ✅ helpful checks
+    "strict": true,                       // strict mode on (better type safety)
+    "esModuleInterop": true,              // easier imports (like import express from "express")
+    "forceConsistentCasingInFileNames": true,
+
+    // ⚡ relax annoying checks
+    "skipLibCheck": true,                 // don’t type-check node_modules
+    "noImplicitAny": false,               // allow variables without explicit types
+    "strictNullChecks": false,            // don’t force handling null/undefined everywhere
+    "resolveJsonModule": true             // let you import .json files easily
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}

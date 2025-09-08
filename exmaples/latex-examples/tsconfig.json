@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@algorithm-visualizer/typescript-framer": ["../../dist/@algorithm-visualizer/typescript-framer"],
+      "@algorithm-visualizer/typescript-recorder": ["../../dist/@algorithm-visualizer/typescript-recorder"],
+      "@algorithm-visualizer/typescript-latex-renderer": ["../../dist/@algorithm-visualizer/typescript-latex-renderer"]
+    },
+    "module": "CommonJS",
+    "target": "ES2020",
+    "outDir": "dist",
+    "strict": true,
+    "esModuleInterop": true
+  },
+  "include": ["src/**/*"]
+}

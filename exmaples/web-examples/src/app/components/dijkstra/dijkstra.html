@@ -1,0 +1,29 @@
+<div class="setting">
+
+  <div class="start">
+    <div class="setting-section">
+      <span>Node Density </span>
+      <p-slider [(ngModel)]="nodeDensity" (ngModelChange)="onNodeDensityChanged()" [min]="2" [max]="26" class="slider"/>
+      <span>({{ nodeDensity }})</span>
+    </div>
+
+    <div class="setting-section">
+      <span>Edge Density </span>
+      <p-slider [(ngModel)]="edgeDensity" (ngModelChange)="run()" [min]="1" [max]="maxEdgeDensity" class="slider"/>
+      <span>({{ edgeDensity }})</span>
+    </div>
+
+    <div class="setting-section">
+      <span>Distance Range </span>
+      <p-slider [(ngModel)]="distanceRange" (ngModelChange)="run()" [min]="1" [max]="100" [range]="true" class="slider"/>
+      <span>({{ distanceRange[0] + ' - ' + distanceRange[1] }})</span>
+    </div>
+
+    <p-select [options]="nodeOptions" [(ngModel)]="startNode" (ngModelChange)="run()" size="small" optionLabel="label" optionValue="value" placeholder="Select start node" class="w-full md:w-56" />
+
+    <p-select [options]="nodeOptions" [(ngModel)]="endNode" (ngModelChange)="run()" size="small" optionLabel="label" optionValue="value" placeholder="Select a end node" class="w-full md:w-56" />
+  </div>
+
+  <p-button [size]="'small'" (click)="run()" [icon]="'pi pi-sync'"/>
+</div>
+<web-renderer [animation]="animation" [rendererMetadata]="rendererMetadata" class="renderer"></web-renderer>

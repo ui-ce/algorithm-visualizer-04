@@ -1,0 +1,16 @@
+<div class="toolbar">
+  <div class="player">
+    <p-button [size]="'small'" (click)="first()" icon="pi pi-angle-double-left"/>
+    <p-button [size]="'small'" (click)="prev()" icon="pi pi-angle-left"/>
+    <p-button [size]="'small'" (click)="togglePlay()" [icon]="this.playing ? 'pi pi-spin pi-spinner' : 'pi pi-play'"/>
+    <p-button [size]="'small'" (click)="next()" icon="pi pi-angle-right"/>
+    <p-button [size]="'small'" (click)="last()" icon="pi pi-angle-double-right"/>
+  </div>
+
+  <div class="frame-slider">
+    <span>{{ frameIndex + 1 }} / {{ animationLength || 1 }}</span>
+    <p-slider [ngModel]="frameIndex" (ngModelChange)="onFrameIndexChanged($event)" [min]="0" [max]="(animationLength ?? 1) - 1" class="slider"/>
+  </div>
+
+  <p-knob [ngModel]="frameTime" (ngModelChange)="onFrameTimeChanged($event)" [size]="65" [min]="1" [max]="1000" valueTemplate="{value}ms"/>
+</div>

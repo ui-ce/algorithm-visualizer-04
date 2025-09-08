@@ -1,0 +1,32 @@
+.setting {
+  display: flex;
+  justify-content: space-between;
+  height: 3rem;
+  border-block-end: 1px solid black;
+  padding-inline: 2rem;
+  align-items: center;
+
+  .start {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+
+    .setting-section {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+
+      font-family: Roboto;
+      font-size: 0.85rem;
+      color: gray;
+
+      .slider {
+        width: 10rem;
+      }
+    }
+  }
+}
+
+.renderer {
+  padding-inline: 2rem;
+}

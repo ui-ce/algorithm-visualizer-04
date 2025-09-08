@@ -1,0 +1,10 @@
+<div class="setting">
+  <div class="setting-section">
+    <span>Node Density </span>
+    <p-slider [(ngModel)]="nodeDensity" (ngModelChange)="run()" [min]="2" [max]="26" class="slider"/>
+    <span>({{ nodeDensity }})</span>
+  </div>
+
+  <p-button [size]="'small'" (click)="run()" [icon]="'pi pi-sync'"/>
+</div>
+<web-renderer [animation]="animation" [rendererMetadata]="rendererMetadata" class="renderer"></web-renderer>

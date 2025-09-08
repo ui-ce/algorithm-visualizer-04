@@ -1,0 +1,376 @@
+\documentclass{article}
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+\usepackage[margin=1in]{geometry}
+\begin{document}
+% --- Frame 0 ---
+\begin{center}\LARGE\textbf{Binary Search}\\[6mm]\end{center}
+\begin{center}
+\begin{flushleft}\textbf{Log}\\[1.75mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (0,0) rectangle (10cm, -0.25cm);
+  \node[anchor=north, align=center, text=black] at (5cm,0) {\texttt{Initial State}};
+\end{tikzpicture}
+\end{center}
+\noindent\rule{\linewidth}{0.3pt}
+\begin{center}
+\begin{flushleft}\textbf{Array}\\[1.75mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (0cm,0) rectangle (0.5cm,3.5cm);
+  \filldraw[fill=gray!30] (0cm,0) rectangle (0.5cm,0.175cm);
+  \node[above] at (0.25cm,0.175cm) {1};
+  \filldraw[fill=white!0, draw=none] (0.7cm,0) rectangle (1.2cm,3.5cm);
+  \filldraw[fill=gray!30] (0.7cm,0) rectangle (1.2cm,0.5249999999999999cm);
+  \node[above] at (0.95cm,0.5249999999999999cm) {3};
+  \filldraw[fill=white!0, draw=none] (1.4cm,0) rectangle (1.9cm,3.5cm);
+  \filldraw[fill=gray!30] (1.4cm,0) rectangle (1.9cm,0.875cm);
+  \node[above] at (1.65cm,0.875cm) {5};
+  \filldraw[fill=white!0, draw=none] (2.0999999999999996cm,0) rectangle (2.5999999999999996cm,3.5cm);
+  \filldraw[fill=gray!30] (2.0999999999999996cm,0) rectangle (2.5999999999999996cm,1.2249999999999999cm);
+  \node[above] at (2.3499999999999996cm,1.2249999999999999cm) {7};
+  \filldraw[fill=white!0, draw=none] (2.8cm,0) rectangle (3.3cm,3.5cm);
+  \filldraw[fill=gray!30] (2.8cm,0) rectangle (3.3cm,1.575cm);
+  \node[above] at (3.05cm,1.575cm) {9};
+  \filldraw[fill=white!0, draw=none] (3.5cm,0) rectangle (4cm,3.5cm);
+  \filldraw[fill=gray!30] (3.5cm,0) rectangle (4cm,1.9249999999999998cm);
+  \node[above] at (3.75cm,1.9249999999999998cm) {11};
+  \filldraw[fill=white!0, draw=none] (4.199999999999999cm,0) rectangle (4.699999999999999cm,3.5cm);
+  \filldraw[fill=gray!30] (4.199999999999999cm,0) rectangle (4.699999999999999cm,2.275cm);
+  \node[above] at (4.449999999999999cm,2.275cm) {13};
+  \filldraw[fill=white!0, draw=none] (4.8999999999999995cm,0) rectangle (5.3999999999999995cm,3.5cm);
+  \filldraw[fill=gray!30] (4.8999999999999995cm,0) rectangle (5.3999999999999995cm,2.625cm);
+  \node[above] at (5.1499999999999995cm,2.625cm) {15};
+  \filldraw[fill=white!0, draw=none] (5.6cm,0) rectangle (6.1cm,3.5cm);
+  \filldraw[fill=gray!30] (5.6cm,0) rectangle (6.1cm,2.9749999999999996cm);
+  \node[above] at (5.85cm,2.9749999999999996cm) {17};
+  \filldraw[fill=white!0, draw=none] (6.3cm,0) rectangle (6.8cm,3.5cm);
+  \filldraw[fill=gray!30] (6.3cm,0) rectangle (6.8cm,3.5cm);
+  \node[above] at (6.55cm,3.5cm) {20};
+\end{tikzpicture}
+\end{center}
+\newpage
+% --- Frame 1 ---
+\begin{center}\LARGE\textbf{Binary Search}\\[6mm]\end{center}
+\begin{center}
+\begin{flushleft}\textbf{Log}\\[1.75mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (0,0) rectangle (10cm, -0.25cm);
+  \node[anchor=north, align=center, text=black] at (5cm,0) {\texttt{Searching from index 0 to 9}};
+\end{tikzpicture}
+\end{center}
+\noindent\rule{\linewidth}{0.3pt}
+\begin{center}
+\begin{flushleft}\textbf{Array}\\[1.75mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (0cm,0) rectangle (0.5cm,3.5cm);
+  \filldraw[fill=blue!50] (0cm,0cm) rectangle (0.5cm,0.175cm);
+  \node[above] at (0.25cm,0.175cm) {1};
+  \filldraw[fill=white!0, draw=none] (0.7cm,0) rectangle (1.2cm,3.5cm);
+  \filldraw[fill=blue!50] (0.7cm,0cm) rectangle (1.2cm,0.5249999999999999cm);
+  \node[above] at (0.95cm,0.5249999999999999cm) {3};
+  \filldraw[fill=white!0, draw=none] (1.4cm,0) rectangle (1.9cm,3.5cm);
+  \filldraw[fill=blue!50] (1.4cm,0cm) rectangle (1.9cm,0.875cm);
+  \node[above] at (1.65cm,0.875cm) {5};
+  \filldraw[fill=white!0, draw=none] (2.0999999999999996cm,0) rectangle (2.5999999999999996cm,3.5cm);
+  \filldraw[fill=blue!50] (2.0999999999999996cm,0cm) rectangle (2.5999999999999996cm,1.2249999999999999cm);
+  \node[above] at (2.3499999999999996cm,1.2249999999999999cm) {7};
+  \filldraw[fill=white!0, draw=none] (2.8cm,0) rectangle (3.3cm,3.5cm);
+  \filldraw[fill=blue!50] (2.8cm,0cm) rectangle (3.3cm,1.575cm);
+  \node[above] at (3.05cm,1.575cm) {9};
+  \filldraw[fill=white!0, draw=none] (3.5cm,0) rectangle (4cm,3.5cm);
+  \filldraw[fill=blue!50] (3.5cm,0cm) rectangle (4cm,1.9249999999999998cm);
+  \node[above] at (3.75cm,1.9249999999999998cm) {11};
+  \filldraw[fill=white!0, draw=none] (4.199999999999999cm,0) rectangle (4.699999999999999cm,3.5cm);
+  \filldraw[fill=blue!50] (4.199999999999999cm,0cm) rectangle (4.699999999999999cm,2.275cm);
+  \node[above] at (4.449999999999999cm,2.275cm) {13};
+  \filldraw[fill=white!0, draw=none] (4.8999999999999995cm,0) rectangle (5.3999999999999995cm,3.5cm);
+  \filldraw[fill=blue!50] (4.8999999999999995cm,0cm) rectangle (5.3999999999999995cm,2.625cm);
+  \node[above] at (5.1499999999999995cm,2.625cm) {15};
+  \filldraw[fill=white!0, draw=none] (5.6cm,0) rectangle (6.1cm,3.5cm);
+  \filldraw[fill=blue!50] (5.6cm,0cm) rectangle (6.1cm,2.9749999999999996cm);
+  \node[above] at (5.85cm,2.9749999999999996cm) {17};
+  \filldraw[fill=white!0, draw=none] (6.3cm,0) rectangle (6.8cm,3.5cm);
+  \filldraw[fill=blue!50] (6.3cm,0cm) rectangle (6.8cm,3.5cm);
+  \node[above] at (6.55cm,3.5cm) {20};
+\end{tikzpicture}
+\end{center}
+\newpage
+% --- Frame 2 ---
+\begin{center}\LARGE\textbf{Binary Search}\\[6mm]\end{center}
+\begin{center}
+\begin{flushleft}\textbf{Log}\\[1.75mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (0,0) rectangle (10cm, -0.25cm);
+  \node[anchor=north, align=center, text=black] at (5cm,0) {\texttt{Comparing current section middle cell value with 11}};
+\end{tikzpicture}
+\end{center}
+\noindent\rule{\linewidth}{0.3pt}
+\begin{center}
+\begin{flushleft}\textbf{Array}\\[1.75mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (0cm,0) rectangle (0.5cm,3.5cm);
+  \filldraw[fill=blue!50] (0cm,0cm) rectangle (0.5cm,0.175cm);
+  \node[above] at (0.25cm,0.175cm) {1};
+  \filldraw[fill=white!0, draw=none] (0.7cm,0) rectangle (1.2cm,3.5cm);
+  \filldraw[fill=blue!50] (0.7cm,0cm) rectangle (1.2cm,0.5249999999999999cm);
+  \node[above] at (0.95cm,0.5249999999999999cm) {3};
+  \filldraw[fill=white!0, draw=none] (1.4cm,0) rectangle (1.9cm,3.5cm);
+  \filldraw[fill=blue!50] (1.4cm,0cm) rectangle (1.9cm,0.875cm);
+  \node[above] at (1.65cm,0.875cm) {5};
+  \filldraw[fill=white!0, draw=none] (2.0999999999999996cm,0) rectangle (2.5999999999999996cm,3.5cm);
+  \filldraw[fill=blue!50] (2.0999999999999996cm,0cm) rectangle (2.5999999999999996cm,1.2249999999999999cm);
+  \node[above] at (2.3499999999999996cm,1.2249999999999999cm) {7};
+  \filldraw[fill=white!0, draw=none] (2.8cm,0) rectangle (3.3cm,3.5cm);
+  \filldraw[fill=blue!50] (2.8cm,0cm) rectangle (3.3cm,1.575cm);
+  \filldraw[fill=brown!50] (2.9cm,0.1cm) rectangle (3.1999999999999997cm,1.4749999999999999cm);
+  \node[above] at (3.05cm,1.575cm) {9};
+  \filldraw[fill=white!0, draw=none] (3.5cm,0) rectangle (4cm,3.5cm);
+  \filldraw[fill=blue!50] (3.5cm,0cm) rectangle (4cm,1.9249999999999998cm);
+  \node[above] at (3.75cm,1.9249999999999998cm) {11};
+  \filldraw[fill=white!0, draw=none] (4.199999999999999cm,0) rectangle (4.699999999999999cm,3.5cm);
+  \filldraw[fill=blue!50] (4.199999999999999cm,0cm) rectangle (4.699999999999999cm,2.275cm);
+  \node[above] at (4.449999999999999cm,2.275cm) {13};
+  \filldraw[fill=white!0, draw=none] (4.8999999999999995cm,0) rectangle (5.3999999999999995cm,3.5cm);
+  \filldraw[fill=blue!50] (4.8999999999999995cm,0cm) rectangle (5.3999999999999995cm,2.625cm);
+  \node[above] at (5.1499999999999995cm,2.625cm) {15};
+  \filldraw[fill=white!0, draw=none] (5.6cm,0) rectangle (6.1cm,3.5cm);
+  \filldraw[fill=blue!50] (5.6cm,0cm) rectangle (6.1cm,2.9749999999999996cm);
+  \node[above] at (5.85cm,2.9749999999999996cm) {17};
+  \filldraw[fill=white!0, draw=none] (6.3cm,0) rectangle (6.8cm,3.5cm);
+  \filldraw[fill=blue!50] (6.3cm,0cm) rectangle (6.8cm,3.5cm);
+  \node[above] at (6.55cm,3.5cm) {20};
+\end{tikzpicture}
+\end{center}
+\newpage
+% --- Frame 3 ---
+\begin{center}\LARGE\textbf{Binary Search}\\[6mm]\end{center}
+\begin{center}
+\begin{flushleft}\textbf{Log}\\[1.75mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (0,0) rectangle (10cm, -0.25cm);
+  \node[anchor=north, align=center, text=black] at (5cm,0) {\texttt{Searching from index 5 to 9}};
+\end{tikzpicture}
+\end{center}
+\noindent\rule{\linewidth}{0.3pt}
+\begin{center}
+\begin{flushleft}\textbf{Array}\\[1.75mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (0cm,0) rectangle (0.5cm,3.5cm);
+  \filldraw[fill=gray!30] (0cm,0) rectangle (0.5cm,0.175cm);
+  \node[above] at (0.25cm,0.175cm) {1};
+  \filldraw[fill=white!0, draw=none] (0.7cm,0) rectangle (1.2cm,3.5cm);
+  \filldraw[fill=gray!30] (0.7cm,0) rectangle (1.2cm,0.5249999999999999cm);
+  \node[above] at (0.95cm,0.5249999999999999cm) {3};
+  \filldraw[fill=white!0, draw=none] (1.4cm,0) rectangle (1.9cm,3.5cm);
+  \filldraw[fill=gray!30] (1.4cm,0) rectangle (1.9cm,0.875cm);
+  \node[above] at (1.65cm,0.875cm) {5};
+  \filldraw[fill=white!0, draw=none] (2.0999999999999996cm,0) rectangle (2.5999999999999996cm,3.5cm);
+  \filldraw[fill=gray!30] (2.0999999999999996cm,0) rectangle (2.5999999999999996cm,1.2249999999999999cm);
+  \node[above] at (2.3499999999999996cm,1.2249999999999999cm) {7};
+  \filldraw[fill=white!0, draw=none] (2.8cm,0) rectangle (3.3cm,3.5cm);
+  \filldraw[fill=gray!30] (2.8cm,0) rectangle (3.3cm,1.575cm);
+  \node[above] at (3.05cm,1.575cm) {9};
+  \filldraw[fill=white!0, draw=none] (3.5cm,0) rectangle (4cm,3.5cm);
+  \filldraw[fill=blue!50] (3.5cm,0cm) rectangle (4cm,1.9249999999999998cm);
+  \node[above] at (3.75cm,1.9249999999999998cm) {11};
+  \filldraw[fill=white!0, draw=none] (4.199999999999999cm,0) rectangle (4.699999999999999cm,3.5cm);
+  \filldraw[fill=blue!50] (4.199999999999999cm,0cm) rectangle (4.699999999999999cm,2.275cm);
+  \node[above] at (4.449999999999999cm,2.275cm) {13};
+  \filldraw[fill=white!0, draw=none] (4.8999999999999995cm,0) rectangle (5.3999999999999995cm,3.5cm);
+  \filldraw[fill=blue!50] (4.8999999999999995cm,0cm) rectangle (5.3999999999999995cm,2.625cm);
+  \node[above] at (5.1499999999999995cm,2.625cm) {15};
+  \filldraw[fill=white!0, draw=none] (5.6cm,0) rectangle (6.1cm,3.5cm);
+  \filldraw[fill=blue!50] (5.6cm,0cm) rectangle (6.1cm,2.9749999999999996cm);
+  \node[above] at (5.85cm,2.9749999999999996cm) {17};
+  \filldraw[fill=white!0, draw=none] (6.3cm,0) rectangle (6.8cm,3.5cm);
+  \filldraw[fill=blue!50] (6.3cm,0cm) rectangle (6.8cm,3.5cm);
+  \node[above] at (6.55cm,3.5cm) {20};
+\end{tikzpicture}
+\end{center}
+\newpage
+% --- Frame 4 ---
+\begin{center}\LARGE\textbf{Binary Search}\\[6mm]\end{center}
+\begin{center}
+\begin{flushleft}\textbf{Log}\\[1.75mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (0,0) rectangle (10cm, -0.25cm);
+  \node[anchor=north, align=center, text=black] at (5cm,0) {\texttt{Comparing current section middle cell value with 11}};
+\end{tikzpicture}
+\end{center}
+\noindent\rule{\linewidth}{0.3pt}
+\begin{center}
+\begin{flushleft}\textbf{Array}\\[1.75mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (0cm,0) rectangle (0.5cm,3.5cm);
+  \filldraw[fill=gray!30] (0cm,0) rectangle (0.5cm,0.175cm);
+  \node[above] at (0.25cm,0.175cm) {1};
+  \filldraw[fill=white!0, draw=none] (0.7cm,0) rectangle (1.2cm,3.5cm);
+  \filldraw[fill=gray!30] (0.7cm,0) rectangle (1.2cm,0.5249999999999999cm);
+  \node[above] at (0.95cm,0.5249999999999999cm) {3};
+  \filldraw[fill=white!0, draw=none] (1.4cm,0) rectangle (1.9cm,3.5cm);
+  \filldraw[fill=gray!30] (1.4cm,0) rectangle (1.9cm,0.875cm);
+  \node[above] at (1.65cm,0.875cm) {5};
+  \filldraw[fill=white!0, draw=none] (2.0999999999999996cm,0) rectangle (2.5999999999999996cm,3.5cm);
+  \filldraw[fill=gray!30] (2.0999999999999996cm,0) rectangle (2.5999999999999996cm,1.2249999999999999cm);
+  \node[above] at (2.3499999999999996cm,1.2249999999999999cm) {7};
+  \filldraw[fill=white!0, draw=none] (2.8cm,0) rectangle (3.3cm,3.5cm);
+  \filldraw[fill=gray!30] (2.8cm,0) rectangle (3.3cm,1.575cm);
+  \node[above] at (3.05cm,1.575cm) {9};
+  \filldraw[fill=white!0, draw=none] (3.5cm,0) rectangle (4cm,3.5cm);
+  \filldraw[fill=blue!50] (3.5cm,0cm) rectangle (4cm,1.9249999999999998cm);
+  \node[above] at (3.75cm,1.9249999999999998cm) {11};
+  \filldraw[fill=white!0, draw=none] (4.199999999999999cm,0) rectangle (4.699999999999999cm,3.5cm);
+  \filldraw[fill=blue!50] (4.199999999999999cm,0cm) rectangle (4.699999999999999cm,2.275cm);
+  \node[above] at (4.449999999999999cm,2.275cm) {13};
+  \filldraw[fill=white!0, draw=none] (4.8999999999999995cm,0) rectangle (5.3999999999999995cm,3.5cm);
+  \filldraw[fill=blue!50] (4.8999999999999995cm,0cm) rectangle (5.3999999999999995cm,2.625cm);
+  \filldraw[fill=brown!50] (4.999999999999999cm,0.1cm) rectangle (5.3cm,2.525cm);
+  \node[above] at (5.1499999999999995cm,2.625cm) {15};
+  \filldraw[fill=white!0, draw=none] (5.6cm,0) rectangle (6.1cm,3.5cm);
+  \filldraw[fill=blue!50] (5.6cm,0cm) rectangle (6.1cm,2.9749999999999996cm);
+  \node[above] at (5.85cm,2.9749999999999996cm) {17};
+  \filldraw[fill=white!0, draw=none] (6.3cm,0) rectangle (6.8cm,3.5cm);
+  \filldraw[fill=blue!50] (6.3cm,0cm) rectangle (6.8cm,3.5cm);
+  \node[above] at (6.55cm,3.5cm) {20};
+\end{tikzpicture}
+\end{center}
+\newpage
+% --- Frame 5 ---
+\begin{center}\LARGE\textbf{Binary Search}\\[6mm]\end{center}
+\begin{center}
+\begin{flushleft}\textbf{Log}\\[1.75mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (0,0) rectangle (10cm, -0.25cm);
+  \node[anchor=north, align=center, text=black] at (5cm,0) {\texttt{Searching from index 5 to 6}};
+\end{tikzpicture}
+\end{center}
+\noindent\rule{\linewidth}{0.3pt}
+\begin{center}
+\begin{flushleft}\textbf{Array}\\[1.75mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (0cm,0) rectangle (0.5cm,3.5cm);
+  \filldraw[fill=gray!30] (0cm,0) rectangle (0.5cm,0.175cm);
+  \node[above] at (0.25cm,0.175cm) {1};
+  \filldraw[fill=white!0, draw=none] (0.7cm,0) rectangle (1.2cm,3.5cm);
+  \filldraw[fill=gray!30] (0.7cm,0) rectangle (1.2cm,0.5249999999999999cm);
+  \node[above] at (0.95cm,0.5249999999999999cm) {3};
+  \filldraw[fill=white!0, draw=none] (1.4cm,0) rectangle (1.9cm,3.5cm);
+  \filldraw[fill=gray!30] (1.4cm,0) rectangle (1.9cm,0.875cm);
+  \node[above] at (1.65cm,0.875cm) {5};
+  \filldraw[fill=white!0, draw=none] (2.0999999999999996cm,0) rectangle (2.5999999999999996cm,3.5cm);
+  \filldraw[fill=gray!30] (2.0999999999999996cm,0) rectangle (2.5999999999999996cm,1.2249999999999999cm);
+  \node[above] at (2.3499999999999996cm,1.2249999999999999cm) {7};
+  \filldraw[fill=white!0, draw=none] (2.8cm,0) rectangle (3.3cm,3.5cm);
+  \filldraw[fill=gray!30] (2.8cm,0) rectangle (3.3cm,1.575cm);
+  \node[above] at (3.05cm,1.575cm) {9};
+  \filldraw[fill=white!0, draw=none] (3.5cm,0) rectangle (4cm,3.5cm);
+  \filldraw[fill=blue!50] (3.5cm,0cm) rectangle (4cm,1.9249999999999998cm);
+  \node[above] at (3.75cm,1.9249999999999998cm) {11};
+  \filldraw[fill=white!0, draw=none] (4.199999999999999cm,0) rectangle (4.699999999999999cm,3.5cm);
+  \filldraw[fill=blue!50] (4.199999999999999cm,0cm) rectangle (4.699999999999999cm,2.275cm);
+  \node[above] at (4.449999999999999cm,2.275cm) {13};
+  \filldraw[fill=white!0, draw=none] (4.8999999999999995cm,0) rectangle (5.3999999999999995cm,3.5cm);
+  \filldraw[fill=gray!30] (4.8999999999999995cm,0) rectangle (5.3999999999999995cm,2.625cm);
+  \node[above] at (5.1499999999999995cm,2.625cm) {15};
+  \filldraw[fill=white!0, draw=none] (5.6cm,0) rectangle (6.1cm,3.5cm);
+  \filldraw[fill=gray!30] (5.6cm,0) rectangle (6.1cm,2.9749999999999996cm);
+  \node[above] at (5.85cm,2.9749999999999996cm) {17};
+  \filldraw[fill=white!0, draw=none] (6.3cm,0) rectangle (6.8cm,3.5cm);
+  \filldraw[fill=gray!30] (6.3cm,0) rectangle (6.8cm,3.5cm);
+  \node[above] at (6.55cm,3.5cm) {20};
+\end{tikzpicture}
+\end{center}
+\newpage
+% --- Frame 6 ---
+\begin{center}\LARGE\textbf{Binary Search}\\[6mm]\end{center}
+\begin{center}
+\begin{flushleft}\textbf{Log}\\[1.75mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (0,0) rectangle (10cm, -0.25cm);
+  \node[anchor=north, align=center, text=black] at (5cm,0) {\texttt{Comparing current section middle cell value with 11}};
+\end{tikzpicture}
+\end{center}
+\noindent\rule{\linewidth}{0.3pt}
+\begin{center}
+\begin{flushleft}\textbf{Array}\\[1.75mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (0cm,0) rectangle (0.5cm,3.5cm);
+  \filldraw[fill=gray!30] (0cm,0) rectangle (0.5cm,0.175cm);
+  \node[above] at (0.25cm,0.175cm) {1};
+  \filldraw[fill=white!0, draw=none] (0.7cm,0) rectangle (1.2cm,3.5cm);
+  \filldraw[fill=gray!30] (0.7cm,0) rectangle (1.2cm,0.5249999999999999cm);
+  \node[above] at (0.95cm,0.5249999999999999cm) {3};
+  \filldraw[fill=white!0, draw=none] (1.4cm,0) rectangle (1.9cm,3.5cm);
+  \filldraw[fill=gray!30] (1.4cm,0) rectangle (1.9cm,0.875cm);
+  \node[above] at (1.65cm,0.875cm) {5};
+  \filldraw[fill=white!0, draw=none] (2.0999999999999996cm,0) rectangle (2.5999999999999996cm,3.5cm);
+  \filldraw[fill=gray!30] (2.0999999999999996cm,0) rectangle (2.5999999999999996cm,1.2249999999999999cm);
+  \node[above] at (2.3499999999999996cm,1.2249999999999999cm) {7};
+  \filldraw[fill=white!0, draw=none] (2.8cm,0) rectangle (3.3cm,3.5cm);
+  \filldraw[fill=gray!30] (2.8cm,0) rectangle (3.3cm,1.575cm);
+  \node[above] at (3.05cm,1.575cm) {9};
+  \filldraw[fill=white!0, draw=none] (3.5cm,0) rectangle (4cm,3.5cm);
+  \filldraw[fill=blue!50] (3.5cm,0cm) rectangle (4cm,1.9249999999999998cm);
+  \filldraw[fill=brown!50] (3.6cm,0.1cm) rectangle (3.9cm,1.8249999999999997cm);
+  \node[above] at (3.75cm,1.9249999999999998cm) {11};
+  \filldraw[fill=white!0, draw=none] (4.199999999999999cm,0) rectangle (4.699999999999999cm,3.5cm);
+  \filldraw[fill=blue!50] (4.199999999999999cm,0cm) rectangle (4.699999999999999cm,2.275cm);
+  \node[above] at (4.449999999999999cm,2.275cm) {13};
+  \filldraw[fill=white!0, draw=none] (4.8999999999999995cm,0) rectangle (5.3999999999999995cm,3.5cm);
+  \filldraw[fill=gray!30] (4.8999999999999995cm,0) rectangle (5.3999999999999995cm,2.625cm);
+  \node[above] at (5.1499999999999995cm,2.625cm) {15};
+  \filldraw[fill=white!0, draw=none] (5.6cm,0) rectangle (6.1cm,3.5cm);
+  \filldraw[fill=gray!30] (5.6cm,0) rectangle (6.1cm,2.9749999999999996cm);
+  \node[above] at (5.85cm,2.9749999999999996cm) {17};
+  \filldraw[fill=white!0, draw=none] (6.3cm,0) rectangle (6.8cm,3.5cm);
+  \filldraw[fill=gray!30] (6.3cm,0) rectangle (6.8cm,3.5cm);
+  \node[above] at (6.55cm,3.5cm) {20};
+\end{tikzpicture}
+\end{center}
+\newpage
+% --- Frame 7 ---
+\begin{center}\LARGE\textbf{Binary Search}\\[6mm]\end{center}
+\begin{center}
+\begin{flushleft}\textbf{Log}\\[1.75mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (0,0) rectangle (10cm, -0.25cm);
+  \node[anchor=north, align=center, text=black] at (5cm,0) {\texttt{Found 11 at index 5}};
+\end{tikzpicture}
+\end{center}
+\noindent\rule{\linewidth}{0.3pt}
+\begin{center}
+\begin{flushleft}\textbf{Array}\\[1.75mm]\end{flushleft}
+\begin{tikzpicture}
+  \filldraw[fill=white!0, draw=none] (0cm,0) rectangle (0.5cm,3.5cm);
+  \filldraw[fill=gray!30] (0cm,0) rectangle (0.5cm,0.175cm);
+  \node[above] at (0.25cm,0.175cm) {1};
+  \filldraw[fill=white!0, draw=none] (0.7cm,0) rectangle (1.2cm,3.5cm);
+  \filldraw[fill=gray!30] (0.7cm,0) rectangle (1.2cm,0.5249999999999999cm);
+  \node[above] at (0.95cm,0.5249999999999999cm) {3};
+  \filldraw[fill=white!0, draw=none] (1.4cm,0) rectangle (1.9cm,3.5cm);
+  \filldraw[fill=gray!30] (1.4cm,0) rectangle (1.9cm,0.875cm);
+  \node[above] at (1.65cm,0.875cm) {5};
+  \filldraw[fill=white!0, draw=none] (2.0999999999999996cm,0) rectangle (2.5999999999999996cm,3.5cm);
+  \filldraw[fill=gray!30] (2.0999999999999996cm,0) rectangle (2.5999999999999996cm,1.2249999999999999cm);
+  \node[above] at (2.3499999999999996cm,1.2249999999999999cm) {7};
+  \filldraw[fill=white!0, draw=none] (2.8cm,0) rectangle (3.3cm,3.5cm);
+  \filldraw[fill=gray!30] (2.8cm,0) rectangle (3.3cm,1.575cm);
+  \node[above] at (3.05cm,1.575cm) {9};
+  \filldraw[fill=white!0, draw=none] (3.5cm,0) rectangle (4cm,3.5cm);
+  \filldraw[fill=green!50] (3.5cm,0cm) rectangle (4cm,1.9249999999999998cm);
+  \node[above] at (3.75cm,1.9249999999999998cm) {11};
+  \filldraw[fill=white!0, draw=none] (4.199999999999999cm,0) rectangle (4.699999999999999cm,3.5cm);
+  \filldraw[fill=gray!30] (4.199999999999999cm,0) rectangle (4.699999999999999cm,2.275cm);
+  \node[above] at (4.449999999999999cm,2.275cm) {13};
+  \filldraw[fill=white!0, draw=none] (4.8999999999999995cm,0) rectangle (5.3999999999999995cm,3.5cm);
+  \filldraw[fill=gray!30] (4.8999999999999995cm,0) rectangle (5.3999999999999995cm,2.625cm);
+  \node[above] at (5.1499999999999995cm,2.625cm) {15};
+  \filldraw[fill=white!0, draw=none] (5.6cm,0) rectangle (6.1cm,3.5cm);
+  \filldraw[fill=gray!30] (5.6cm,0) rectangle (6.1cm,2.9749999999999996cm);
+  \node[above] at (5.85cm,2.9749999999999996cm) {17};
+  \filldraw[fill=white!0, draw=none] (6.3cm,0) rectangle (6.8cm,3.5cm);
+  \filldraw[fill=gray!30] (6.3cm,0) rectangle (6.8cm,3.5cm);
+  \node[above] at (6.55cm,3.5cm) {20};
+\end{tikzpicture}
+\end{center}
+\end{document}

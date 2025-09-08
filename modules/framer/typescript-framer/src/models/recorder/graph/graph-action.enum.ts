@@ -1,0 +1,15 @@
+export enum GraphAction {
+  ADD_NODE = 'AddNode',
+  REMOVE_NODE = 'RemoveNode',
+  ADD_EDGE = 'AddEdge',
+  REMOVE_EDGE = 'RemoveEdge',
+  REMOVE_EDGES = 'RemoveEdges',
+  SET_NODE_HIGHLIGHT = 'SetNodeHighlight',
+  CLEAR_NODE_HIGHLIGHT = 'ClearNodeHighlight',
+  CLEAR_ALL_NODES_HIGHLIGHT = 'ClearAllNodesHighlight',
+  SET_EDGE_HIGHLIGHT = 'SetEdgeHighlight',
+  SET_EDGES_HIGHLIGHT = 'SetEdgesHighlight',
+  CLEAR_EDGE_HIGHLIGHT = 'ClearEdgeHighlight',
+  CLEAR_EDGES_HIGHLIGHT = 'ClearEdgesHighlight',
+  CLEAR_ALL_EDGES_HIGHLIGHT = 'ClearAllEdgesHighlight',
+}
