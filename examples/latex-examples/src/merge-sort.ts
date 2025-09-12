@@ -5,9 +5,9 @@ import {
   LogRecorder,
   RecorderEngine,
   Recording,
-} from "@algorithm-visualizer/typescript-recorder";
-import { FramerEngine } from "@algorithm-visualizer/typescript-framer";
-import { RendererEngine } from "@algorithm-visualizer/typescript-latex-renderer";
+} from "../../../dist/@algorithm-visualizer/typescript-recorder";
+import { FramerEngine } from "../../../dist/@algorithm-visualizer/typescript-framer";
+import { RendererEngine } from "../../../dist/@algorithm-visualizer/typescript-latex-renderer";
 import { writeFileSync } from "node:fs";
 import { execSync } from "node:child_process";
 
