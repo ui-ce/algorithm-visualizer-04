@@ -62,8 +62,6 @@ All documentation is in the [`docs/`](./docs) folder:
 - **Contracts**:
     - [Recording Contract](./docs/contracts/recording.contract.md)
     - [Animation Contract](./docs/contracts/animation.contract.md)
-  
-
 - **Project Overview**: Full documentation of the framework.
 
 ---
@@ -71,8 +69,8 @@ All documentation is in the [`docs/`](./docs) folder:
 ## 🚀 Examples
 
 Example projects are in the [`examples/`](./examples) folder:
-- [Latex Examples](./examples/latex-examples/README.md)
-- [Web Examples](./examples/web-examples/README.md)
+- [Latex Examples](./docs/contracts/recording.contract.md)
+- [Web Examples](./docs/contracts/recording.contract.md)
 
 ---
 
