@@ -10,47 +10,28 @@ The framework is structured into three main layers:
 
 ---
 
-## 📂 Repository Structure
-
-```text
-root
-├── dist/                         # Built versions of all modules (ready-to-use libraries)
-├── docs/                         # Project documentation
-│   ├── contracts/                # Recording & Animation contracts
-│   └── ...                       # General project documentation
-├── examples/                     # Example usage projects
-│   ├── latex-examples/           # Example project using LaTeX renderer
-│   └── web-examples/             # Example project using Angular web renderer
-└── modules/                      # Source code of the framework
-    ├── recorder/                 # Recorder layer implementation
-    │   └── typescript-recorder/  # TypeScript recorder (implements recording contract)
-    ├── framer/                   # Framer layer implementation
-    │   └── typescript-framer/    # TypeScript framer (recording → animation contract)
-    └── renderer/                 # Renderer layer implementation
-        ├── typescript-angular-renderer/ # Angular web renderer
-        └── typescript-latex-renderer/   # LaTeX/TikZ renderer
-```
+## 📂 Repository Structure  
 
 
 ---
 
 ## 📦 Modules
 
-### Recorder
+### Recorder  
 Captures algorithm events (array operations, graph updates, logs, etc.) in a standardized format.
 
-- [Typescript Recorder](./modules/recorder/typescript-recorder/README.md)
+- [Typescript Recorder](./)
 
 ### Framer
 Converts recorded events into a sequence of complete frames that describe the algorithm execution step by step.
 
-- [Typescript Framer](./modules/framer/typescript-framer/README.md)
+- [Recording Contract](./docs/contracts/recording.contract.md)
 
 ### Renderer
 Converts framer animation output into a complete render for each frame.
 
-- [Typescript Angular Renderer](./modules/renderer/typescript-angular-renderer/README.md)
-- [Typescript Latex Renderer](./modules/renderer/typescript-latex-renderer/README.md)
+- [Recording Contract](./docs/contracts/recording.contract.md)
+- [Recording Contract](./docs/contracts/recording.contract.md)
 
 Each implemented module contains its own `README.md` with details and usage instructions.
 

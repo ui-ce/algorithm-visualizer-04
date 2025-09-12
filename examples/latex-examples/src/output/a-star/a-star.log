@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.8.27)  6 SEP 2025 22:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.8.27)  12 SEP 2025 20:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -351,7 +351,7 @@ Package: iftex 2024/12/12 v1.0g TeX engine tests
 File: l3backend-pdftex.def 2025-06-09 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count307
 )
-No file a-star.aux.
+(output/a-star//a-star.aux)
 \openout1 = `a-star.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 5.
@@ -368,6 +368,7 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 5.
 LaTeX Font Info:    ... okay on input line 5.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 5.
 LaTeX Font Info:    ... okay on input line 5.
+
 (c:/texlive/2025/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count308
@@ -575,10 +576,10 @@ L3 programming layer <2025-08-13>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 12503 strings out of 468924
- 258358 string characters out of 5456900
- 665473 words of memory out of 5000000
- 40790 multiletter control sequences out of 15000+600000
+ 12506 strings out of 468924
+ 258431 string characters out of 5456900
+ 665466 words of memory out of 5000000
+ 40791 multiletter control sequences out of 15000+600000
  627907 words of font info for 44 fonts, out of 8000000 for 9000
  430 hyphenation exceptions out of 8191
  102i,6n,107p,425b,669s stack positions out of 10000i,1000n,20000p,200000b,200000s
