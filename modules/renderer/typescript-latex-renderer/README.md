@@ -23,6 +23,8 @@ A TypeScript renderer compatible with the **Animation Contract**, producing LaTe
 npm install @algorithm-visualizer/typescript-latex-renderer
 ```
 
+keep in mind in order to be able to install this module from npm you need to first publish the built library on npm.
+
 ---
 
 ## Usage
@@ -56,12 +58,23 @@ console.log(latexOutput); // LaTeX document as string
 
 ## Build
 
+In order to build this module first we need to install its dependencies, so first be sure you are at the root of the module and then run the following commands:
+
+```bash
+npm i
+```
+
+This package uses `tsup` for building:
+
 ```bash
 npm run build
 ```
 
-- Uses tsup for building.
-- Output location: dist/@algorithm-visualizer/typescript-latex-renderer.
+The build will generate outputs into:
+
+```ts
+dist/@algorithm-visualizer/typescript-latex-renderer/
+```
 
 ---
 

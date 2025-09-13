@@ -19,7 +19,7 @@ Each recorder emits a sequence of **commands** that later is combing into one ge
 npm install @algorithm-visualizer/typescript-recorder
 ```
 
-The library is bundled with tsup and outputs both ESM and CJS builds with type definitions.
+keep in mind in order to be able to install this module from npm you need to first publish the built library on npm.
 
 ---
 
@@ -112,7 +112,15 @@ type CommandGroup = Command[];
 
 ---
 
-## 🛠 Development
+## 🛠 Build
+
+In order to build this module first we need to install its dependencies, so first be sure you are at the root of the module and then run the following commands:
+
+```bash
+npm i
+```
+
+This package uses `tsup` for building:
 
 ```bash
 npm run build

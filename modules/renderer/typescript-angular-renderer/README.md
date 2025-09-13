@@ -28,11 +28,26 @@ Peer dependencies:
 - primeicons ^7.0.0
 - cytoscape ^3.33.1
 
+keep in mind in order to be able to install this module from npm you need to first publish the built library on npm.
+
 ---
 
 ## Building the Library
 
-The library is an Angular project inside an Angular workspace. Build it using:
+
+In order to build this module first we need to install the angular project's dependencies, so first be sure you are at the root of the module and then run the following commands:
+
+```bash
+npm i
+```
+
+Then navigate to `/projects/typescript-angular-renderer` and run the following command to install the angular libraries dependencies:
+
+```bash
+npm i
+```
+
+After that you should be able to build the library by navigating to `/src` and running the command below:
 
 ```bash
 ng build typescript-angular-renderer

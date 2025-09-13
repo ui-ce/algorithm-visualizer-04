@@ -12,11 +12,15 @@ Each type of recorder (Array2D, Chart, Graph, Log) has a corresponding framer im
 - Uses `tsup` to build the package.
 - Output build location is the default (`dist` folder).
 
+---
+
 ## Installation
 
 ```bash
 npm install @algorithm-visualizer/typescript-framer
 ```
+
+keep in mind in order to be able to install this module from npm you need to first publish the built library on npm.
 
 ---
 
@@ -61,13 +65,24 @@ const animation = framer.getAnimation(recording);
 
 # Build
 
+In order to build this module first we need to install its dependencies, so first be sure you are at the root of the module and then run the following commands:
+
+```bash
+npm i
+```
+
 This package uses `tsup` for building:
 
 ```bash
 npm run build
 ```
 
-The output will be available in the default build location (e.g., dist).
+The build will generate outputs into:
+
+```ts
+dist/@algorithm-visualizer/typescript-framer/
+```
+
 
 ---
 
