@@ -14,7 +14,7 @@ import { Button } from 'primeng/button';
 
 @Component({
   selector: 'algo-binary-search',
-  imports: [WebRenderer, Slider, FormsModule, InputNumber, Select, Button],
+  imports: [WebRenderer, Slider, FormsModule, InputNumber, Button],
   templateUrl: './binary-search.html',
   styleUrl: './binary-search.scss',
 })
