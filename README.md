@@ -1,6 +1,6 @@
 # Algorithm Visualization Framework
 
-This project is a framework for **recording, framing, and rendering algorithms**.  
+Algorithm Visualizer is a framework for **recording, framing, and rendering algorithms**.  
 It allows algorithm executions to be captured, transformed into frame-based animations, and rendered either as **LaTeX/TikZ (PDF)** or as **interactive web components (Angular)**.
 
 The framework is structured into three main layers:
